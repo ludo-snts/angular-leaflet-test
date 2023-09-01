@@ -1,1 +1,60 @@
-/* You can add global styles to this file, and also import other style files */
+/* Leaflet */
+.custom-pin img {
+    height: 3.5rem;
+    width: 3.5rem !important;
+    border-radius: 2rem;
+    background-color: #F28B25;
+    border: none !important; 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    object-fit: cover;
+    
+}
+.leaflet-marker-icon {
+    border: none !important;
+    background-color: transparent !important;
+}
+
+/* forcer le style du zoom */
+.leaflet-control-zoom { /* zoom control container */
+    border: none !important; 
+    background-color: transparent!important;
+    width: 2rem !important;
+    height: 5rem !important;
+    position: fixed !important;
+    bottom: 50vh !important;
+    right: 2rem;
+    margin: 0 !important;
+    padding: 0 !important;
+    /*soit on place le radius sur le parent (border-radius + overflow:hidden) soit sur les enfants .leaflet-control-zoom a:nth-child(1) & .leaflet-control-zoom a:nth-child(2) */
+    border-radius: 2rem !important; 
+    overflow: hidden !important;
+}
+.leaflet-control-zoom a {
+    border: none !important; 
+    background-color: hsla(210, 10%, 23%, 0.9) !important;
+    color: white !important;
+    width: 2rem !important;
+    height: 2.5rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+/*soit on place le radius sur le parent (border-radius + overflow:hidden) soit sur les enfants .leaflet-control-zoom a:nth-child(1) & .leaflet-control-zoom a:nth-child(2) */
+
+/* cibler le premier enfant de leaflet-control-zoom a  (bouton +)*/
+/* .leaflet-control-zoom a:nth-child(1) {
+    border-top-left-radius: 2rem !important;
+    border-top-right-radius: 2rem !important;
+} */
+/* cibler le deuxieme enfant de leaflet-control-zoom a (bouton -)*/
+/* .leaflet-control-zoom a:nth-child(2) {
+    border-bottom-left-radius: 2rem !important;
+    border-bottom-right-radius: 2rem !important;
+} */
+
+/* TODO  remplacer les span + & - par icone personnalisés (loupe avec +&-) - voir maquette FIGMA */
+
