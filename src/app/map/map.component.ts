@@ -73,6 +73,15 @@ export class MapComponent implements AfterViewInit {
 
     marker.addTo(this.map);
 
+    // TEST: ajout d'une searchbar
+    // var searchbox = L.Control.searchbox({
+    //   position: 'topright',
+    //   expand: 'left'
+    // });
+    // searchbox.addTo(this.map);
+
+    
+
   }
 
 
