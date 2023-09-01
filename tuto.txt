@@ -1,0 +1,101 @@
+#prérequis:
+-NODE.JS
+-NPM
+-ANGULAR
+
+#créer projet angular/cli via NPM:
+npx @angular/cli new nom_du_projet
+
+#installer leaflet via NPM
+npm i leaflet
+
+#ajouter un composant 'map'
+ng generate component map
+
+#mise en forme de map.component.html: (exemple)
+<div class="map-container">
+  <div class="map-frame">
+    <div id="map"></div>
+  </div>
+</div>
+
+#ajout du style de la carte sur map.component.class: (exemple d'une carte pleine page)
+.map-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.map-frame {
+    height: 100%;
+}
+
+#map {
+    height: 100%;
+}
+
+#on passe sur map.component.ts:
+##on importe le package Leaflet :
+import * as L from 'leaflet';
+
+##si message d'erreur pointant sur 'leaflet' :
+npm i --save-dev @types/leaflet
+(ajout de "@types/leaflet" dans les devDependencies de package.json )
+
+##la div id="map" doit exister dans le DOM avant d'y faire référence pourcréer la carte
+##on l'initialise avant avec AfterViewInit:
+###importer AfterViewInit (et supprimer OnInit )
+import { Component, AfterViewInit } from '@angular/core';
+###implementer AfterViewInit à MapComponent
+export class MapComponent implements AfterViewInit
+###ajouter la fonction ngAfterViewInit()
+ngAfterViewInit(): void { }
+
+## créer une fonction privée initMap() pour isoler l'initialisation de la map (+création d'un objet Leaflet map : map)
+private map;
+## si erreur type : Le membre 'map' possède implicitement un type 'any', utiliser un opérateur d'assertion non null (!):
+private map!: L.Map;
+
+private initMap(): void {
+    this.map = L.map('map', {
+        center: [ 42.695648193359375, 2.889158010482788 ],
+        zoom: 15
+    });
+}
+##appeler la map dans ngAfterViewInit:
+this.initMap();
+
+#positionner vous sur map.component.html, supprimer son contenu et ajouter:
+<app-map></app-map>
+
+#lancer le serveur:
+npm start
+#sur votre navigateur, aller sur la page localhost:4200
+
+#si tout s'est bien passé, votre composant map devrait apparaitre 
+#(pas de panique, vous verrez seulement les commandes et le lien vers le site de leaflet en haut à gauche, les tuiles sont pour le moment manquante)
+
+#positionner vous sur map.component.ts
+## dans la fonction initMap(), ajouter:
+const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    minZoom: 3,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+});
+
+tiles.addTo(this.map);
+
+#retourner sur votre navigateur, les tuiles devraient maintenant apparaitre.
+#la disposition des tuiles n'est cependant pas "optimale", car il manque le style de Leaflet:
+##ouvrir angular.json pour y ajouter le style de leaflet: leaflett.css
+##chercher :
+    "styles": [
+        "src/styles.css"
+    ],
+#et ajouter:
+    "./node_modules/leaflet/dist/leaflet.css",
+#au dessus de "src/styles.css"
+
+#relancer le serveur et aller actualiser localhost:4200
