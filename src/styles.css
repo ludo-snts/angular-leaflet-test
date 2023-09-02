@@ -56,7 +56,15 @@
     border-bottom-right-radius: 2rem !important;
 } */
 
-/* TODO  remplacer les span + & - par icone personnalisés (loupe avec +&-) - voir maquette FIGMA */
+/* TODO  remplacer les span + & - par icone personnalisés (loupe avec +&-) - voir maquette FIGMA */ : OK PAS BEAU
+/* .leaflet-control-zoom-in span {
+content: url(./assets/icons/magnifying-glass-plus-regular.svg);
+height: 60%;
+}
+.leaflet-control-zoom-out span {
+    content: url(./assets/icons/magnifying-glass-minus-regular.svg);
+    height: 60%;
+} */
 
 /* bouton de géolocalisation */
 .locate-user-btn{
