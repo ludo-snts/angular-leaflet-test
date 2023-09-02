@@ -21,7 +21,7 @@
     width: 36px !important; /* valeur maquette FIGMA */
     height: 83px !important; /* valeur maquette FIGMA */
     position: fixed !important;
-    bottom: 50vh !important;
+    bottom: 83px !important;
     right: 2rem;
     margin: 5px !important;
     padding: 0 !important;
@@ -58,3 +58,48 @@
 
 /* TODO  remplacer les span + & - par icone personnalisés (loupe avec +&-) - voir maquette FIGMA */
 
+/* bouton de géolocalisation */
+.locate-user-btn{
+    background-color: #F28B25;
+    margin: 1rem !important;
+    padding: 0 !important;
+    border : none !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    cursor: pointer;
+    z-index: 999;
+    object-fit: scale-down;
+}
+
+.locate-user-btn img{
+    height: 100%;
+    width: 100%;
+}
+
+.geoloc-pin {
+    position:relative ;
+    border-radius: 50% 50% 50% 7%;
+    border: .4rem solid #F28B25;
+    width: 2rem;
+    height: 2rem;
+    transform: rotate(-45deg);
+    transform-origin: -2rem 1rem; /*pour positionner le bas du marqueur sur la position */
+    box-shadow: 0 5px 3px #5e5e5e85;
+}
+
+.geoloc-pin::after {
+    position: absolute;
+    content: '';
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    top: 25%;
+    left: 25%;
+    background-color: #F28B25;
+    box-shadow: 0 5px 3px #5e5e5e85;
+
+}
