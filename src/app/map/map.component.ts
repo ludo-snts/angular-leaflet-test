@@ -27,7 +27,7 @@ export class MapComponent implements AfterViewInit {
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
       minZoom: 3,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      // attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
     // ajout des tuiles à la carte
@@ -114,6 +114,9 @@ locateUser(): void {
       alert('La géolocalisation a été bloquée dans votre navigateur. Veuillez autoriser l\'accès à votre position pour utiliser cette fonctionnalité.');
     }
   });
+
+
+
 }
 
 

@@ -1,6 +1,19 @@
 <div class="map-container">
     <div class="map-frame">
         <div id="map"></div>
-        <button class="locate-user-btn" (click)="locateUser()"><img src="./assets/icons/location-crosshairs-solid.svg"></button>
+        <div class="map-overlay">
+            <button class="locate-user-btn" (click)="locateUser()">
+                <img src="./assets/icons/location-crosshairs-solid.svg">
+            </button>
+            <div class="search-container">
+                <input type="text" class="search-input">
+                <div class="search-btn">
+                    <img src="./assets/icons/magnifying-glass-solid.svg"> 
+                </div>       
+            </div>
+            <button class="settings-btn" >
+                <img src="./assets/icons/sliders-solid.svg">
+            </button> 
+        </div>   
     </div>
 </div>

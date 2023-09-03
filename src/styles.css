@@ -56,7 +56,7 @@
     border-bottom-right-radius: 2rem !important;
 } */
 
-/* TODO  remplacer les span + & - par icone personnalisés (loupe avec +&-) - voir maquette FIGMA */ : OK PAS BEAU
+/* TODO  remplacer les span + & - par icone personnalisés (loupe avec +&-) - voir maquette FIGMA  : OK PAS BEAU */
 /* .leaflet-control-zoom-in span {
 content: url(./assets/icons/magnifying-glass-plus-regular.svg);
 height: 60%;
@@ -66,28 +66,7 @@ height: 60%;
     height: 60%;
 } */
 
-/* bouton de géolocalisation */
-.locate-user-btn{
-    background-color: #F28B25;
-    margin: 1rem !important;
-    padding: 0 !important;
-    border : none !important;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
-    cursor: pointer;
-    z-index: 999;
-    object-fit: scale-down;
-}
-
-.locate-user-btn img{
-    height: 100%;
-    width: 100%;
-}
-
+/* marqueur custom pour la position de l'utilisateur */
 .geoloc-pin {
     position:relative ;
     border-radius: 50% 50% 50% 7%;
@@ -98,7 +77,6 @@ height: 60%;
     transform-origin: -2rem 1rem; /*pour positionner le bas du marqueur sur la position */
     box-shadow: 0 5px 3px #5e5e5e85;
 }
-
 .geoloc-pin::after {
     position: absolute;
     content: '';
@@ -111,3 +89,76 @@ height: 60%;
     box-shadow: 0 5px 3px #5e5e5e85;
 
 }
+.map-frame {
+    width: 100%;
+}
+/* commande personnalisée */
+.map-overlay {
+    position: fixed;
+    top: 0;
+    margin-block: 1rem !important;
+
+    height: 50px;
+    width: 100%;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* bouton de géolocalisation & bouton de réglages */
+.locate-user-btn,
+.settings-btn{
+    background-color: #F28B25;
+    padding: 0 !important;
+    margin-inline: 1rem !important;
+    border : none !important;
+    min-height: 50px;
+    min-width: 50px;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    cursor: pointer;
+    z-index: 999;
+}
+.locate-user-btn img,
+.settings-btn img{
+    height: 100%;
+    width: 100%;
+}
+
+/* bouton de recherche */
+.search-container{
+    background-color: #F28B25;
+    padding: 0 !important;
+    border : 4px solid #F28B25 !important;
+    right: 50vw;
+    height: 42px;
+    width: 300px;
+    border-radius: 25px;
+    cursor: pointer;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.search-input{
+    width: 250px;
+    height: 100%;
+    border: none;
+    border-radius: 21px;
+}
+.search-btn img{
+    height: 50px;
+    width: 50px;
+}
+
+/* Misc */
+.leaflet-control-attribution {
+    /* cacher le logo leaflet */
+    display: none !important; 
+    /* cacher le fond dulogo leaflet */
+    /* background-color: transparent !important;  */
+}
+

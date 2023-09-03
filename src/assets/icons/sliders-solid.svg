@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1080" height="1080" viewBox="0 0 1080 1080" xml:space="preserve">
+<desc>Created with Fabric.js 5.2.4</desc>
+<defs>
+</defs>
+<g transform="matrix(1 0 0 1 540 540)" id="4682023a-43cc-4695-a345-c1e45d838002"  >
+<rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1; visibility: hidden;" vector-effect="non-scaling-stroke"  x="-540" y="-540" rx="0" ry="0" width="1080" height="1080" />
+</g>
+<g transform="matrix(1 0 0 1 540 540)" id="c6e0f499-682c-4af5-ac5c-eb8dd66a9e8f"  >
+</g>
+<g transform="matrix(1 0 0 1 540 540)" id="684b0c0e-e5c4-46a5-bda9-4ca7959b7f36"  >
+<path style="stroke: rgb(255,255,255); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  transform=" translate(-256, -256)" d="M 0 416 C 0 433.7 14.3 448 32 448 L 86.7 448 C 99 476.3 127.2 496 160 496 C 192.8 496 221 476.3 233.3 448 L 480 448 C 497.7 448 512 433.7 512 416 C 512 398.3 497.7 384 480 384 L 233.3 384 C 221 355.7 192.8 336 160 336 C 127.19999999999999 336 99 355.7 86.7 384 L 32 384 C 14.3 384 0 398.3 0 416 z M 128 416 C 128 398.3268880054146 142.32688800541462 384 160 384 C 177.67311199458538 384 192 398.3268880054146 192 416 C 192 433.6731119945854 177.67311199458538 448 160 448 C 142.32688800541462 448 128 433.6731119945854 128 416 z M 320 256 C 320 238.32688800541462 334.3268880054146 224 352 224 C 369.6731119945854 224 384 238.32688800541462 384 256 C 384 273.6731119945854 369.6731119945854 288 352 288 C 334.3268880054146 288 320 273.6731119945854 320 256 z M 352 176 C 319.2 176 291 195.7 278.7 224 L 32 224 C 14.3 224 0 238.3 0 256 C 0 273.7 14.3 288 32 288 L 278.7 288 C 291 316.3 319.2 336 352 336 C 384.8 336 413 316.3 425.3 288 L 480 288 C 497.7 288 512 273.7 512 256 C 512 238.3 497.7 224 480 224 L 425.3 224 C 413 195.7 384.8 176 352 176 z M 192 128 C 174.32688800541462 128 160 113.67311199458538 160 96 C 160 78.32688800541462 174.32688800541462 64 192 64 C 209.67311199458538 64 224 78.3268880054146 224 96 C 224 113.67311199458538 209.67311199458538 128 192 128 z M 265.3 64 C 253 35.7 224.8 16 192 16 C 159.2 16 131 35.7 118.7 64 L 32 64 C 14.3 64 0 78.3 0 96 C 0 113.7 14.3 128 32 128 L 118.7 128 C 131 156.3 159.2 176 192 176 C 224.8 176 253 156.3 265.3 128 L 480 128 C 497.7 128 512 113.7 512 96 C 512 78.3 497.7 64 480 64 L 265.3 64 z" stroke-linecap="round" />
+</g>
+</svg>
