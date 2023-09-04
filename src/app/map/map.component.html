@@ -17,11 +17,11 @@
                 </button>
                 <div class="settings-wrapper" [ngClass]="{'show': showSettings}">
                     <div class="settings-maptype-container">
-                        <input type="radio" class="settings-maptype-radio" value="" name="radio" id="radio1">
+                        <input type="radio" class="settings-maptype-radio" value="custom" name="radio" id="radio1">
                         <label class="settings-maptype-label" for="radio1"> 
                             <img class="settings-maptype-label-img" src="./assets/icons/floppy-disk-solid-bk.svg">
                         </label>
-                        <input type="radio" class="settings-maptype-radio" value="" name="radio" id="radio2">
+                        <input type="radio" class="settings-maptype-radio" value="default" name="radio" id="radio2">
                         <label class="settings-maptype-label" for="radio2"> 
                             <img class="settings-maptype-label-img" src="./assets/icons/globe-solid.svg">
                         </label> 
@@ -29,9 +29,6 @@
                     <div class="settings-othertype-container">
                     </div>
                 </div>
-                
-                
-
             </div> 
             <button class="locate-user-btn" (click)="locateUser()">
                 <img src="./assets/icons/location-crosshairs-solid.svg">
