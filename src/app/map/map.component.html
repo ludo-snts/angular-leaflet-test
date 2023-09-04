@@ -2,8 +2,8 @@
     <div class="map-frame">
         <div id="map"></div>
         <div class="map-overlay">
-            <button class="locate-user-btn" (click)="locateUser()">
-                <img src="./assets/icons/location-crosshairs-solid.svg">
+            <button class="return-btn">
+                <img src="./assets/icons/chevron-left-solid.svg">
             </button>
             <div class="search-container">
                 <input type="text" class="search-input">
@@ -11,9 +11,17 @@
                     <img src="./assets/icons/magnifying-glass-solid.svg"> 
                 </div>       
             </div>
-            <button class="settings-btn" >
-                <img src="./assets/icons/sliders-solid.svg">
-            </button> 
+            <div class="settings-container">
+                <button class="settings-btn" (click)="toggleSettings()" >
+                    <img src="./assets/icons/sliders-solid.svg">
+                </button>
+                <div class="settings-wrapper" [ngClass]="{'show': showSettings}">
+                    
+                </div>
+            </div> 
+            <button class="locate-user-btn" (click)="locateUser()">
+                <img src="./assets/icons/location-crosshairs-solid.svg">
+            </button>
         </div>   
     </div>
 </div>

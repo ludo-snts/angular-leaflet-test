@@ -4,33 +4,38 @@
     width: 3.5rem !important;
     border-radius: 2rem;
     background-color: #F28B25;
-    border: none !important; 
+    border: none !important;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     object-fit: cover;
-    
+
 }
+
 .leaflet-marker-icon {
     border: none !important;
     background-color: transparent !important;
 }
 
 /* forcer le style du zoom */
-.leaflet-control-zoom { /* zoom control container */
-    border: none !important; 
-    background-color: transparent!important;
-    width: 36px !important; /* valeur maquette FIGMA */
-    height: 83px !important; /* valeur maquette FIGMA */
+.leaflet-control-zoom {
+    /* zoom control container */
+    border: none !important;
+    background-color: transparent !important;
+    width: 36px !important;
+    /* valeur maquette FIGMA */
+    height: 83px !important;
+    /* valeur maquette FIGMA */
     position: fixed !important;
-    bottom: 83px !important;
-    right: 2rem;
-    margin: 5px !important;
+    bottom: 36px !important;
+    right: 36px;
+    margin: 0 !important;
     padding: 0 !important;
     /*soit on place le radius sur le parent (border-radius + overflow:hidden) soit sur les enfants .leaflet-control-zoom a:nth-child(1) & .leaflet-control-zoom a:nth-child(2) */
-    border-radius: 2rem !important; 
+    border-radius: 2rem !important;
     overflow: hidden !important;
 }
+
 .leaflet-control-zoom a {
-    border: none !important; 
+    border: none !important;
     background-color: hsla(210, 10%, 23%, 0.9) !important;
     color: white !important;
     width: 100% !important;
@@ -41,6 +46,7 @@
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
+    cursor: pointer !important;
 }
 
 /*soit on place le radius sur le parent (border-radius + overflow:hidden) soit sur les enfants .leaflet-control-zoom a:nth-child(1) & .leaflet-control-zoom a:nth-child(2) */
@@ -66,17 +72,43 @@ height: 60%;
     height: 60%;
 } */
 
+
+/* GEOLOCALISATION */
+/* bouton de géolocalisation */
+.locate-user-btn {
+    background-color: hsla(210, 10%, 23%, 0.9);
+    position: fixed !important;
+    bottom: 125px !important;
+    right: 36px;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    /* min-height: 36px;
+    min-width: 36px; */
+    height: 36px;
+    width: 36px;
+    border-radius: 18px;
+    cursor: pointer;
+    z-index: 999;
+}
+.locate-user-btn img {
+    height: 100%;
+    width: 100%;
+}
 /* marqueur custom pour la position de l'utilisateur */
 .geoloc-pin {
-    position:relative ;
+    position: relative;
     border-radius: 50% 50% 50% 7%;
     border: .4rem solid #F28B25;
+    background-color: #ffffffbf;
     width: 2rem;
     height: 2rem;
     transform: rotate(-45deg);
-    transform-origin: -2rem 1rem; /*pour positionner le bas du marqueur sur la position */
+    transform-origin: -2rem 1rem;
+    /*pour positionner le bas du marqueur sur la position */
     box-shadow: 0 5px 3px #5e5e5e85;
 }
+
 .geoloc-pin::after {
     position: absolute;
     content: '';
@@ -87,11 +119,12 @@ height: 60%;
     left: 25%;
     background-color: #F28B25;
     box-shadow: 0 5px 3px #5e5e5e85;
-
 }
+
 .map-frame {
     width: 100%;
 }
+
 /* commande personnalisée */
 .map-overlay {
     position: fixed;
@@ -106,13 +139,12 @@ height: 60%;
     align-items: center;
 }
 
-/* bouton de géolocalisation & bouton de réglages */
-.locate-user-btn,
-.settings-btn{
+/* bouton de réglages */
+.settings-btn {
     background-color: #F28B25;
     padding: 0 !important;
     margin-inline: 1rem !important;
-    border : none !important;
+    border: none !important;
     min-height: 50px;
     min-width: 50px;
     height: 50px;
@@ -121,17 +153,17 @@ height: 60%;
     cursor: pointer;
     z-index: 999;
 }
-.locate-user-btn img,
-.settings-btn img{
+
+.settings-btn img {
     height: 100%;
     width: 100%;
 }
 
 /* bouton de recherche */
-.search-container{
+.search-container {
     background-color: #F28B25;
     padding: 0 !important;
-    border : 4px solid #F28B25 !important;
+    border: 4px solid #F28B25 !important;
     right: 50vw;
     height: 42px;
     width: 300px;
@@ -143,23 +175,84 @@ height: 60%;
     align-items: center;
     overflow: hidden;
 }
-.search-input{
+
+.search-input {
     width: 100%;
     height: 100%;
     border: none;
     border-radius: 21px;
+    text-indent: .5rem;
+    padding-inline: .5rem;
 }
-.search-btn img{
+
+.search-btn img {
     height: 50px;
     width: 50px;
     min-width: 50px;
 }
 
+/* zone de réglages */
+.settings-container {
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+}
+.settings-wrapper {
+    position: fixed;
+    top: 5rem;
+    right: 1rem;
+    height: 10vh;
+    width: 15rem;
+    border: 4px solid #F28B25 !important;
+    border-radius: 25px;
+    background-color: #FFF;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    transition: transform .5s ease-in-out;
+}
+.settings-wrapper {
+    opacity: 0; /* Initiallement invisible */
+    transition: opacity 0.3s ease; /* Transition douce sur l'opacité */
+}
+.settings-wrapper.show {
+    opacity: 1; /* Rendre visible */
+}
+
+.return-btn {
+    background-color: #F28B25;
+    padding: 0 !important;
+    border: none !important;
+    min-height: 50px;
+    min-width: 50px;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    cursor: pointer;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-inline: 1rem !important;
+}
+
+.return-btn img {
+    height: 100%;
+    width: 100%;
+    /* décale légèrement le chevron sur la gauche pour donner l'impression visuelle de centrage */
+    position : relative;
+    right: 2px;
+}
+
+
 /* Misc */
 .leaflet-control-attribution {
     /* cacher le logo leaflet */
-    display: none !important; 
+    display: none !important;
     /* cacher le fond dulogo leaflet */
     /* background-color: transparent !important;  */
 }
-

@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
 
 
@@ -14,6 +14,9 @@ export class MapComponent implements AfterViewInit {
 
   // variable pour suivre l'état de la géolocalisation
   private isGeolocationBlocked = false;
+
+  // Initialisation à false pour cacher settings-wrapper
+  public showSettings = false; 
 
   // initialisation de la carte (valeur par défaut)
   private initMap(): void {
@@ -115,10 +118,13 @@ locateUser(): void {
     }
   });
 
-
-
 }
 
+// fonction accompagnant l'apparition/disparition du menu réglages':
+toggleSettings(): void {
+  // Inverser la valeur actuelle de showSettings
+  this.showSettings = !this.showSettings; 
+}
 
 
   constructor() { }
