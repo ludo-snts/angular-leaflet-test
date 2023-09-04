@@ -16,7 +16,9 @@ export class MapComponent implements AfterViewInit {
   private isGeolocationBlocked = false;
 
   // Initialisation à false pour cacher settings-wrapper
-  public showSettings = false; 
+  public showSettings = false;
+
+
 
   // initialisation de la carte (valeur par défaut)
   private initMap(): void {
@@ -33,8 +35,17 @@ export class MapComponent implements AfterViewInit {
       // attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
+    // TEST: initialisation des tuiles personnalisées (stockées en local dans le dossier assets/tiles/map_test)
+    const customTiles = L.tileLayer('assets/tiles/map_test/{z}/{x}/{y}.png', {
+      maxZoom: 15,
+      minZoom: 14,
+    });
+
     // ajout des tuiles à la carte
+    // customTiles.addTo(this.map);
     tiles.addTo(this.map);
+    
+    
 
     // ajout du zoom personnalisé
     L.control.zoom({
@@ -118,6 +129,8 @@ locateUser(): void {
     }
   });
 
+  
+
 }
 
 // fonction accompagnant l'apparition/disparition du menu réglages':
@@ -127,7 +140,11 @@ toggleSettings(): void {
 }
 
 
-  constructor() { }
+
+
+constructor() {
+
+}
 
   ngAfterViewInit(): void {
     this.initMap();
