@@ -23,37 +23,40 @@ export class MapComponent implements AfterViewInit {
   private initMap(): void {
     this.map = L.map('map', {
       center: [42.69607784382969, 2.8892290890216943], // coordonnées GPS lattitude, longitude de Mind And Go
-      zoom: 15, // zoom de la carte
+      zoom: 7, // zoom de la carte
       zoomControl: false, // désactivation du zoom par défaut
     });
 
-    // initialisation des tuiles (valeur par défaut)
-    const customTiles = L.tileLayer('assets/tiles/map_test/{z}/{x}/{y}.png', {
-      maxZoom: 15,
-      minZoom: 14,
-    });
-
-    // TEST: initialisation des tuiles personnalisées (stockées en local dans le dossier assets/tiles/map_test)
+    // TEST: initialisation des tuiles par défaut (tuiles openStreetMap en ligne)
     const defaultTiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
-      minZoom: 3,
+      minZoom: 1,
     });
 
+    // initialisation des tuiles (valeur custom) tuiles stockées en local dans le dossier assets/tiles/openStreetMap01
+    const OSM01Tiles = L.tileLayer('assets/tiles/openStreetMap01/{z}/{x}/{y}.png', {
+      maxZoom: 7,
+      minZoom: 1,
+    });
+
+
+
+
     // ajout des tuiles à la carte
-    customTiles.addTo(this.map);
+    // customTiles.addTo(this.map);
     defaultTiles.addTo(this.map);
 
     // ajout du controle des couches (tuiles)
     const baseMaps= {
-      "Local":customTiles,
-      "En ligne":defaultTiles
+      " ":defaultTiles,
+      "   ":OSM01Tiles,
     };
 
     // ajout du controle des couches (tuiles) bis
-    let overlayMaps = {
-      "Local":customTiles,
-      "En ligne":defaultTiles    };
+    let overlayMaps = { 
+    };
 
+    // TODO comprendre pourquoi sans overlayMaps, le controle des couches ne s'affiche pas
     L.control.layers(baseMaps, overlayMaps, {
       position: 'bottomleft' // Spécifiez la position en bas à gauche
     }).addTo(this.map);
@@ -89,17 +92,17 @@ export class MapComponent implements AfterViewInit {
     //   userMarker.addTo(this.map);
     // });
 
-    // TEST: ajout d'un marqueur personnalisé
-    const icon = L.divIcon({
-      // iconUrl: 'https://mind-and-go.com/web/image/website/1/logo?unique=f12e26c',
-      // iconUrl: 'https://mind-and-go.com/favicon.ico',
-      html: "<div class='custom-pin'><img src='./assets/icons/ludo.png'></img></div>",
-      // iconSize: [40, 40],
-      // iconAnchor: [ 13, 41 ]
-    });
-    const marker = L.marker([42.69607784382969, 2.8892290890216943], { icon }); // définir la position du marqueur
-    marker.bindPopup('<b>Hello !</b>'); // ajouter un popup au marqueur
-    marker.addTo(this.map); // ajouter le marqueur à la carte
+    // // TEST: ajout d'un marqueur personnalisé
+    // const icon = L.divIcon({
+    //   // iconUrl: 'https://mind-and-go.com/web/image/website/1/logo?unique=f12e26c',
+    //   // iconUrl: 'https://mind-and-go.com/favicon.ico',
+    //   html: "<div class='custom-pin'><img src='./assets/icons/ludo.png'></img></div>",
+    //   // iconSize: [40, 40],
+    //   // iconAnchor: [ 13, 41 ]
+    // });
+    // const marker = L.marker([42.69607784382969, 2.8892290890216943], { icon }); // définir la position du marqueur
+    // marker.bindPopup('<b>Hello !</b>'); // ajouter un popup au marqueur
+    // marker.addTo(this.map); // ajouter le marqueur à la carte
 
 
   }
@@ -123,7 +126,7 @@ export class MapComponent implements AfterViewInit {
       userMarker.addTo(this.map);
     });
 
-    this.map.locate({ setView: true, maxZoom: 16 });
+    this.map.locate({ setView: true, maxZoom: 7 });
 
     // Gérer l'événement de localisation
     this.map.on('locationfound', (e: L.LocationEvent) => {
