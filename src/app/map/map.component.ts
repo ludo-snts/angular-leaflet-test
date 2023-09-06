@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, NgZone } from '@angular/core';
 import * as L from 'leaflet';
+import 'leaflet-search';
 
 
 @Component({
@@ -117,26 +118,51 @@ export class MapComponent implements AfterViewInit {
     //   userMarker.addTo(this.map);
     // });
 
-    // // TEST: ajout d'un marqueur personnalisé
-    // const icon = L.divIcon({
-    //   // iconUrl: 'https://mind-and-go.com/web/image/website/1/logo?unique=f12e26c',
-    //   // iconUrl: 'https://mind-and-go.com/favicon.ico',
-    //   html: "<div class='custom-pin'><img src='./assets/icons/ludo.png'></img></div>",
-    //   // iconSize: [40, 40],
-    //   // iconAnchor: [ 13, 41 ]
-    // });
+    // TEST: ajout d'un marqueur personnalisé sur la carte : OK
+    const icon = L.divIcon({
+      // iconUrl: 'https://mind-and-go.com/web/image/website/1/logo?unique=f12e26c',
+      // iconUrl: 'https://mind-and-go.com/favicon.ico',
+      html: "<div class='custom-pin'><img src='./assets/icons/ludo.png'></img></div>",
+      // iconSize: [40, 40],
+      // iconAnchor: [ 13, 41 ]
+    });
     // const marker = L.marker([42.69607784382969, 2.8892290890216943], { icon }); // définir la position du marqueur
     // marker.bindPopup('<b>Hello !</b>'); // ajouter un popup au marqueur
     // marker.addTo(this.map); // ajouter le marqueur à la carte
 
-    // TEST: afficher le niveau de zoom
+    // TEST: afficher le niveau de zoom : OK
     this.map.on('zoomend', () => {
       // Mise à jour de la valeur du niveau de zoom actuel lorsque le zoom change
       this.currentZoomLevel = this.map.getZoom();
     }
     );
 
-
+    // TEST: ajout d'un layerGroup pour la recherche) : OK
+    var searchLayer = L.layerGroup().addTo(this.map);
+    // TEST: créer markers a partir du fichier data.json et boucler sur les données pour créer les markers
+    //structure d'un element du json: {"nom": "Tokyo","latitude": 35.682839,"longitude": 139.759455}
+    // les ajouter au layerGroup searchLayer
+    fetch('./assets/data/data.json').then(res => res.json()).then(data => {
+      data.forEach((element: { nom: string; latitude: number; longitude: number; }) => {
+        const marker = L.marker([element.latitude, element.longitude], { icon });
+        marker.bindPopup(element.nom);
+        marker.addTo(searchLayer);
+      });
+    }
+    );
+    //TEST/ ajout d'une searchbar avec leaflet-search : EN COURS
+    // this.map.addControl( new L.Control.Search({layer: searchLayer}) );
+    this.map.addControl( new L.Control.Search({
+      layer: searchLayer, 
+      initial: false, 
+      propertyName: 'nom',
+      zoom: 7,
+      marker: false,
+      textPlaceholder: 'Rechercher une ville',
+      textErr: 'Ville non trouvée',
+      textCancel: 'Annuler',
+      
+    }) );
   }
 
 

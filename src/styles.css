@@ -466,6 +466,52 @@ height: 60%;
 }
 
 /* TEST */
+.leaflet-control-search {
+    background-color: red;
+    border: none !important;
+    border-radius: 25px;
+    height: 50px;
+    width: fit-content;
+    margin: 5rem !important;
+    padding: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.leaflet-control-search~label{
+    display: block !important;
+    background-color: blue;
+}
+
+label.search-input {
+    display: block !important;
+    background-color: green;
+}
+input.search-input {
+    display: block !important;
+    background-color: blue;
+}
+
+.search-tooltip {
+    display: block !important;
+    background-color: blueviolet;
+}
+
+.search-cancel,
+.search-button {
+    display: block !important;
+    background-color:lightsalmon;
+    height: 20px;
+    width: 20px;
+}
+
+.search-alert {
+    display: block !important;
+    background-color: lightslategray;
+}
 
 
 
