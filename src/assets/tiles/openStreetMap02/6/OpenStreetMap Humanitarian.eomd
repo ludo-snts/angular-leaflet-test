@@ -1,0 +1,35 @@
+[MapsType]
+MapsType=15
+MapsTypeName=OpenStreetMap Humanitarian
+
+[AREA]
+LeftLongitude=-180
+RightLongitude=180
+TopLatitude=85
+BottomLatitude=-85
+
+Left_Longitude_download= -180.00000000000000
+Right_Longitude_download=  180.00000000000000
+Top_Latitude_download=   85.05112877980663
+Bottom_Latitude_download=  -85.05112877980663
+
+[Zoom]
+Zoom=7
+
+[XY]
+MinX=0
+MinY=0
+MaxX=127
+MaxY=127
+
+[FolderStyle]
+FolderStyleValue=2
+[TilenameStyle]
+TilenameStyleValue=2
+
+
+
+
+
+
+

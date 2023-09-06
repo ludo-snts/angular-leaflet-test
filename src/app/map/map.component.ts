@@ -17,7 +17,17 @@ export class MapComponent implements AfterViewInit {
 
   // Initialisation à false pour cacher settings-wrapper
   public showSettings = false;
+    // Initialisation à false pour cacher search-input-container
+    public showSearch = false;
 
+  // Initialisation des tuiles
+  private defaultTiles!: L.TileLayer;
+  private satelliteTiles!: L.TileLayer;
+  private OSM01Tiles!: L.TileLayer;
+  private OSM02Tiles!: L.TileLayer;
+
+  // Initialisation de la variable de zoom
+  public currentZoomLevel: number = 7; // Initialisez-la avec la valeur de zoom par défaut
 
   // initialisation de la carte (valeur par défaut)
   private initMap(): void {
@@ -27,29 +37,42 @@ export class MapComponent implements AfterViewInit {
       zoomControl: false, // désactivation du zoom par défaut
     });
 
-    // TEST: initialisation des tuiles par défaut (tuiles openStreetMap en ligne)
-    const defaultTiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    // initialisation des tuiles par défaut (tuiles openStreetMap en ligne)
+    this.defaultTiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
       minZoom: 1,
     });
 
-    // initialisation des tuiles (valeur custom) tuiles stockées en local dans le dossier assets/tiles/openStreetMap01
-    const OSM01Tiles = L.tileLayer('assets/tiles/openStreetMap01/{z}/{x}/{y}.png', {
+        // initialisation des tuiles par défaut (tuiles openStreetMap en ligne)
+        this.satelliteTiles = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+          maxZoom: 18,
+          minZoom: 1,
+        });
+
+    // initialisation des tuiles (version de base) tuiles stockées en local dans le dossier assets/tiles/openStreetMap01
+    this.OSM01Tiles = L.tileLayer('assets/tiles/openStreetMap01/{z}/{x}/{y}.png', {
       maxZoom: 7,
       minZoom: 1,
     });
 
+      // initialisation des tuiles (version humanitaire) tuiles stockées en local dans le dossier assets/tiles/openStreetMap02
+      this.OSM02Tiles = L.tileLayer('assets/tiles/openStreetMap02/{z}/{x}/{y}.png', {
+        maxZoom: 7,
+        minZoom: 1,
+      });
 
 
 
     // ajout des tuiles à la carte
     // customTiles.addTo(this.map);
-    defaultTiles.addTo(this.map);
+    this.defaultTiles.addTo(this.map);
 
     // ajout du controle des couches (tuiles)
     const baseMaps= {
-      " ":defaultTiles,
-      "   ":OSM01Tiles,
+      " ":this.defaultTiles,
+      "  ":this.satelliteTiles,
+      "   ":this.OSM01Tiles,
+      "    ":this.OSM02Tiles,
     };
 
     // ajout du controle des couches (tuiles) bis
@@ -62,10 +85,12 @@ export class MapComponent implements AfterViewInit {
     }).addTo(this.map);
 
 
+
     // ajout du zoom personnalisé
     L.control.zoom({
       position: 'bottomright' // position du zoom personnalisé (en bas à droite), le zoom par défaut est en haut à gauche et il est désactivé
     }).addTo(this.map);
+
 
     // TEST: ajout d'un marqueur sur la carte (position par défaut) : OK
     // const marker = L.marker([ 42.69607784382969, 2.8892290890216943 ]);
@@ -104,8 +129,16 @@ export class MapComponent implements AfterViewInit {
     // marker.bindPopup('<b>Hello !</b>'); // ajouter un popup au marqueur
     // marker.addTo(this.map); // ajouter le marqueur à la carte
 
+    // TEST: afficher le niveau de zoom
+    this.map.on('zoomend', () => {
+      // Mise à jour de la valeur du niveau de zoom actuel lorsque le zoom change
+      this.currentZoomLevel = this.map.getZoom();
+    }
+    );
+
 
   }
+
 
 
   //fonction accompagnasnt le bouton de geolocalisation de l'utilisateur: 
@@ -145,7 +178,6 @@ export class MapComponent implements AfterViewInit {
     });
 
 
-
   }
 
   // fonction accompagnant l'apparition/disparition du menu réglages':
@@ -154,6 +186,13 @@ export class MapComponent implements AfterViewInit {
     this.showSettings = !this.showSettings;
   }
 
+    // fonction accompagnant l'apparition/disparition de l'input de recherche':
+    toggleSearch(): void {
+      // Inverser la valeur actuelle de showSearch
+      this.showSearch = !this.showSearch;
+    }
+  
+
   constructor() {
 
   }
@@ -161,5 +200,7 @@ export class MapComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.initMap();
   }
+
+  
 
 }

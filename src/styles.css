@@ -1,3 +1,7 @@
+* {
+    font-family: sans-serif;
+}
+
 /* Leaflet */
 .custom-pin img {
     height: 3.5rem;
@@ -15,6 +19,24 @@
     background-color: transparent !important;
 }
 
+.map-frame {
+    width: 100%;
+}
+
+/* commande personnalisée */
+.map-overlay {
+    position: fixed;
+    top: 0;
+    margin-block: 1rem !important;
+    height: 50px;
+    width: 100%;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ZOOM */
 /* forcer le style du zoom */
 .leaflet-control-zoom {
     /* zoom control container */
@@ -72,6 +94,25 @@ height: 60%;
     height: 60%;
 } */
 
+.zoom-level-info {
+    background-color: hsla(210, 10%, 23%, 0.9);
+    position: fixed !important;
+    bottom: 1rem !important;
+    right: 4rem;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    height: 36px;
+    width: 36px;
+    border-radius: 18px;
+    cursor: none;
+    z-index: 999;
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 /* GEOLOCALISATION */
 /* bouton de géolocalisation */
@@ -108,7 +149,6 @@ height: 60%;
     /*pour positionner le bas du marqueur sur la position */
     box-shadow: 0 5px 3px #5e5e5e85;
 }
-
 .geoloc-pin::after {
     position: absolute;
     content: '';
@@ -121,52 +161,73 @@ height: 60%;
     box-shadow: 0 5px 3px #5e5e5e85;
 }
 
-.map-frame {
-    width: 100%;
-}
-
-/* commande personnalisée */
-.map-overlay {
-    position: fixed;
-    top: 0;
-    margin-block: 1rem !important;
-    height: 50px;
-    width: 100%;
-    z-index: 999;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
 /* RECHERCHE */
 /* bouton de recherche */
 .search-container {
-    background-color: #F28B25;
-    padding: 0 !important;
-    border: 4px solid #F28B25 !important;
-    right: 50vw;
-    height: 42px;
-    width: 300px;
-    border-radius: 25px;
-    cursor: pointer;
     z-index: 999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
+    right: 5rem;
     overflow: hidden;
+    height: 50px;
+    width: fit-content;
+    display: flex;
+    flex-direction: row-reverse;
+    background-color: #fff;
+    border-radius: 25px;
 }
-.search-input {
-    width: 100%;
-    height: 100%;
-    border: none;
-    border-radius: 21px;
-    text-indent: .5rem;
-    padding-inline: .5rem;
-}
-.search-btn img {
+
+.search-btn{
+    background-color: #F28B25;
+    z-index: 999;
     height: 50px;
     width: 50px;
     min-width: 50px;
+    border-radius: 25px;
+    margin: 0 !important;
+    padding: 0 !important;
+    border : none !important;
+    cursor: pointer;
+}
+.search-btn img {
+    height: 100%;
+    width: 100%;
+}
+
+.search-input-wrapper {
+    display: none;
+}
+.search-input-wrapper.show {
+    display: block;
+    border: none !important;
+    animation: slide-left-01 .5s ease-in-out;
+    --search-width: 15rem;
+}
+
+
+@keyframes slide-left-01 {
+    0% {
+        width : 0;
+    }
+    60% {
+        width: calc(var(--search-width) + .5rem);
+    }
+    80% {
+        width: calc(var(--search-width) - .5rem) 
+    }
+    100% {
+        width: var(--search-width);
+    }
+}
+
+.search-input {
+    width: var(--search-width);
+    background-color:#FFF;
+    border: none;
+    border-radius: 25px;
+    text-indent: .5rem;
+    padding-inline: .5rem;
+    height: 100%;
 }
 
 /* REGLAGES */
@@ -288,17 +349,7 @@ height: 60%;
     right: 2px;
 }
 
-
-/* MISC */
-.leaflet-control-attribution {
-    /* cacher le logo leaflet */
-    display: none !important;
-    /* cacher le fond dulogo leaflet */
-    /* background-color: transparent !important;  */
-}
-
-/* TEST */
-
+/* TUILES */
 .leaflet-control-layers {
     border: none !important;
     background-color: #FFF !important;
@@ -309,32 +360,42 @@ height: 60%;
     
 }
 .leaflet-control-layers-toggle {
+    z-index: 999;
     display: block !important;
     background-image: url(./assets/icons/layer-group-solid.svg) !important;
     background-color: #F28B25 !important;
     background-size: 50px 50px !important;
     width: 50px !important;
+    min-width: 50px !important;
     height: 50px !important;
     border-radius: 25px !important;
-    transition: all 0.3s ease-in-out;
 }
 
 .leaflet-control-layers-expanded {
     width: fit-content;
     height: fit-content;
     padding: 0 !important;
-    background-color: #FFF;
     border-radius: 25px;
     transition: all 0.3s ease-in;
     overflow: hidden;
     /* border : 4px solid #F28B25 !important; */
     display: flex;
-    transition: all 0.3s ease-in-out;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !important;
+    animation : slide-right-01 .4s ease-in-out;
+}
+
+@keyframes slide-right-01 {
+    0% {
+        width : 50px;
+    }
+    100% {
+        /* 50px + 184px (largeur des 4 boutons (30px+8px de margin-inline par bouton) */
+        width : calc(50px + (4 * 46px)); 
+    }
 }
 
 .leaflet-control-layers-base {
-    background-color: #FFF;
+    z-index: 998;
     margin: 0 !important;
     /* padding: .5rem !important; */
     height: 50px;
@@ -350,8 +411,20 @@ height: 60%;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    transition: all 0.3s ease-in-out;
+    animation : slide-right-bounce .8s ease-in-out;
+}
 
+@keyframes slide-right-bounce {
+    0% {
+        opacity: 0;
+        transform: translateX(-200%);
+    }
+    60% {
+        opacity: 1;
+        transform: translateX(5px);
+    }
+    80% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
 }
 
 .leaflet-control-layers-selector  {
@@ -366,16 +439,33 @@ height: 60%;
     margin-inline: .5rem;
     opacity: .5;
     transition: all 0.3s ease-in-out;
+    background-image: url(./assets/icons/earth-europe-solid.svg);
 }
 .leaflet-control-layers-base label:first-child{
     background-image: url(./assets/icons/globe-solid.svg);
 }
 
 .leaflet-control-layers-base label:nth-child(2){
+    background-image: url(./assets/icons/satellite-solid.svg);
+}
+
+.leaflet-control-layers-base label:nth-child(3){
     background-image: url(./assets/icons/floppy-disk-solid-bk.svg);
 }
 
+.leaflet-control-layers-base label:nth-child(4){
+    background-image: url(./assets/icons/floppy-disk-solid-bk.svg);
+}
 
+/* MISC */
+.leaflet-control-attribution {
+    /* cacher le logo leaflet */
+    display: none !important;
+    /* cacher le fond dulogo leaflet */
+    /* background-color: transparent !important;  */
+}
+
+/* TEST */
 
 
 

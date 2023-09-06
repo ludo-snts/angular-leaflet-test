@@ -1,0 +1,358 @@
+Project: C:\Users\ludos\Desktop\TILES\OpenStreetMap Humanitarian\OpenStreetMap Humanitarian.eomd
+Log begin......v=6.608
+Now time is:05/09/2023 22:16:49
+
+[MapsType]
+MapsTypeID=15
+MapsTypeName=OpenStreetMap Humanitarian
+
+TileWidth =256
+TileHeight=256
+
+Left Longitude  input= -180
+Right Longitude input= 180
+Top Latitude    input= 85
+Bottom Latitude input= -85
+
+MinX = 0
+MinY = 0
+MaxX = 127
+MaxY = 127
+
+Left Longitude  download=-180
+Right Longitude download=180
+Top Latitude    download=85,0511287798066
+Bottom Latitude download=-85,0511287798066
+
+Total count of images would be downloaded: 16384
+
+Zoom level: 7
+
+path: C:\Users\ludos\Desktop\TILES\OpenStreetMap Humanitarian\
+
+
+Start downloading...
+-----------------------------------------
+
+Writing list file, please wait...this may take some time...
+Write list file OK!
+
+
+Writing status file, please wait...this may take some time...
+Write status file OK!
+
+Initializing array, please wait...this may take some time...
+Initializing array OK!
+ 
+T4 7/64/64.png: OK
+T3 7/63/64.png: OK
+T6 7/64/62.png: OK
+T5 7/64/63.png: OK
+T0 7/63/63.png: OK
+T10 7/61/63.png: OK
+T1 7/62/63.png: OK
+T9 7/61/62.png: OK
+T8 7/62/62.png: OK
+T2 7/62/64.png: OK
+T11 7/61/64.png: OK
+T7 7/63/62.png: OK
+T13 7/62/65.png: OK
+T12 7/61/65.png: OK
+T14 7/63/65.png: OK
+T15 7/64/65.png: OK
+T16 7/65/65.png: OK
+T17 7/65/64.png: OK
+T18 7/65/63.png: OK
+T19 7/65/62.png: OK
+T20 7/65/61.png: OK
+T21 7/64/61.png: OK
+T22 7/63/61.png: OK
+T23 7/62/61.png: OK
+T24 7/61/61.png: OK
+T25 7/60/61.png: OK
+T26 7/60/62.png: OK
+T27 7/60/63.png: OK
+T28 7/60/64.png: OK
+T29 7/60/65.png: OK
+T30 7/60/66.png: OK
+T31 7/61/66.png: OK
+T32 7/62/66.png: OK
+T33 7/63/66.png: OK
+T34 7/64/66.png: OK
+T35 7/65/66.png: OK
+T36 7/66/66.png: OK
+T37 7/66/65.png: OK
+T38 7/66/64.png: OK
+T39 7/66/63.png: OK
+T40 7/66/62.png: OK
+T41 7/66/61.png: OK
+T42 7/66/60.png: OK
+T43 7/65/60.png: OK
+T44 7/64/60.png: OK
+T45 7/63/60.png: OK
+T46 7/62/60.png: OK
+T47 7/61/60.png: OK
+T48 7/60/60.png: OK
+T49 7/59/60.png: OK
+T50 7/59/61.png: OK
+T51 7/59/62.png: OK
+T52 7/59/63.png: OK
+T53 7/59/64.png: OK
+T54 7/59/65.png: OK
+T55 7/59/66.png: OK
+T56 7/59/67.png: OK
+T57 7/60/67.png: OK
+T58 7/61/67.png: OK
+T59 7/62/67.png: OK
+T60 7/63/67.png: OK
+T61 7/64/67.png: OK
+T62 7/65/67.png: OK
+T63 7/66/67.png: OK
+T64 7/67/67.png: OK
+T65 7/67/66.png: OK
+T66 7/67/65.png: OK
+T67 7/67/64.png: OK
+T68 7/67/63.png: OK
+T69 7/67/62.png: OK
+T70 7/67/61.png: OK
+T71 7/67/60.png: OK
+T72 7/67/59.png: OK
+T73 7/66/59.png: OK
+T74 7/65/59.png: OK
+T75 7/64/59.png: OK
+T76 7/63/59.png: OK
+T77 7/62/59.png: OK
+T78 7/61/59.png: OK
+T79 7/60/59.png: OK
+T80 7/59/59.png: OK
+T81 7/58/59.png: OK
+T82 7/58/60.png: OK
+T83 7/58/61.png: OK
+T84 7/58/62.png: OK
+T85 7/58/63.png: OK
+T86 7/58/64.png: OK
+T87 7/58/65.png: OK
+T88 7/58/66.png: OK
+T89 7/58/67.png: OK
+T90 7/58/68.png: OK
+T91 7/59/68.png: OK
+T92 7/60/68.png: OK
+T93 7/61/68.png: OK
+T94 7/62/68.png: OK
+T95 7/63/68.png: OK
+T96 7/64/68.png: OK
+T97 7/65/68.png: OK
+T98 7/66/68.png: OK
+T99 7/67/68.png: OK
+T100 7/68/68.png: OK
+T101 7/68/67.png: OK
+T102 7/68/66.png: OK
+T103 7/68/65.png: OK
+T104 7/68/64.png: OK
+T105 7/68/63.png: OK
+T106 7/68/62.png: OK
+T107 7/68/61.png: OK
+T108 7/68/60.png: OK
+T109 7/68/59.png: OK
+T110 7/68/58.png: OK
+T111 7/67/58.png: OK
+T112 7/66/58.png: OK
+T113 7/65/58.png: OK
+T114 7/64/58.png: OK
+T115 7/63/58.png: OK
+T116 7/62/58.png: OK
+T117 7/61/58.png: OK
+T118 7/60/58.png: OK
+T119 7/59/58.png: OK
+T120 7/58/58.png: OK
+T121 7/57/58.png: OK
+T122 7/57/59.png: OK
+T123 7/57/60.png: OK
+T124 7/57/61.png: OK
+T125 7/57/62.png: OK
+T126 7/57/63.png: OK
+T127 7/57/64.png: OK
+T128 7/57/65.png: OK
+T129 7/57/66.png: OK
+T130 7/57/67.png: OK
+T131 7/57/68.png: OK
+T132 7/57/69.png: OK
+T133 7/58/69.png: OK
+T134 7/59/69.png: OK
+T135 7/60/69.png: OK
+T136 7/61/69.png: OK
+T137 7/62/69.png: OK
+T138 7/63/69.png: OK
+T139 7/64/69.png: OK
+T140 7/65/69.png: OK
+T141 7/66/69.png: OK
+T142 7/67/69.png: OK
+T143 7/68/69.png: OK
+T144 7/69/69.png: OK
+T145 7/69/68.png: OK
+T146 7/69/67.png: OK
+T147 7/69/66.png: OK
+T148 7/69/65.png: OK
+T149 7/69/64.png: OK
+T150 7/69/63.png: OK
+T151 7/69/62.png: OK
+T152 7/69/61.png: OK
+T153 7/69/60.png: OK
+T154 7/69/59.png: OK
+T155 7/69/58.png: OK
+T156 7/69/57.png: OK
+T157 7/68/57.png: OK
+T158 7/67/57.png: OK
+T159 7/66/57.png: OK
+T160 7/65/57.png: OK
+T161 7/64/57.png: OK
+T162 7/63/57.png: OK
+T163 7/62/57.png: OK
+T164 7/61/57.png: OK
+T165 7/60/57.png: OK
+T166 7/59/57.png: OK
+T167 7/58/57.png: OK
+T168 7/57/57.png: OK
+T169 7/56/57.png: OK
+T170 7/56/58.png: OK
+T171 7/56/59.png: OK
+T172 7/56/60.png: OK
+T173 7/56/61.png: OK
+T174 7/56/62.png: OK
+T175 7/56/63.png: OK
+T176 7/56/64.png: OK
+T177 7/56/65.png: OK
+T178 7/56/66.png: OK
+T179 7/56/67.png: OK
+T180 7/56/68.png: OK
+T181 7/56/69.png: OK
+T182 7/56/70.png: OK
+T183 7/57/70.png: OK
+T184 7/58/70.png: OK
+T185 7/59/70.png: OK
+T186 7/60/70.png: OK
+T187 7/61/70.png: OK
+T188 7/62/70.png: OK
+T189 7/63/70.png: OK
+T190 7/64/70.png: OK
+T191 7/65/70.png: OK
+T192 7/66/70.png: OK
+T193 7/67/70.png: OK
+T194 7/68/70.png: OK
+T195 7/69/70.png: OK
+T196 7/70/70.png: OK
+T197 7/70/69.png: OK
+T198 7/70/68.png: OK
+T199 7/70/67.png: OK
+T200 7/70/66.png: OK
+T201 7/70/65.png: OK
+T202 7/70/64.png: OK
+T203 7/70/63.png: OK
+T204 7/70/62.png: OK
+T205 7/70/61.png: OK
+T206 7/70/60.png: OK
+T207 7/70/59.png: OK
+T208 7/70/58.png: OK
+T209 7/70/57.png: OK
+T210 7/70/56.png: OK
+T211 7/69/56.png: OK
+T212 7/68/56.png: OK
+T213 7/67/56.png: OK
+T214 7/66/56.png: OK
+T215 7/65/56.png: OK
+T216 7/64/56.png: OK
+T217 7/63/56.png: OK
+T218 7/62/56.png: OK
+T219 7/61/56.png: OK
+T220 7/60/56.png: OK
+T221 7/59/56.png: OK
+T222 7/58/56.png: OK
+T223 7/57/56.png: OK
+T224 7/56/56.png: OK
+T225 7/55/56.png: OK
+T226 7/55/57.png: OK
+T227 7/55/58.png: OK
+T228 7/55/59.png: OK
+T229 7/55/60.png: OK
+T230 7/55/61.png: OK
+T231 7/55/62.png: OK
+T232 7/55/63.png: OK
+T233 7/55/64.png: OK
+T234 7/55/65.png: OK
+T235 7/55/66.png: OK
+T236 7/55/67.png: OK
+T237 7/55/68.png: OK
+T238 7/55/69.png: OK
+T239 7/55/70.png: OK
+T240 7/55/71.png: OK
+T241 7/56/71.png: OK
+T242 7/57/71.png: OK
+T243 7/58/71.png: OK
+T244 7/59/71.png: OK
+T245 7/60/71.png: OK
+T246 7/61/71.png: OK
+T247 7/62/71.png: OK
+T248 7/63/71.png: OK
+T249 7/64/71.png: OK
+T250 7/65/71.png: OK
+T251 7/66/71.png: OK
+T252 7/67/71.png: OK
+T253 7/68/71.png: OK
+T254 7/69/71.png: OK
+T255 7/70/71.png: OK
+T256 7/71/71.png: OK
+T257 7/71/70.png: OK
+T258 7/71/69.png: OK
+T259 7/71/68.png: OK
+T260 7/71/67.png: OK
+T261 7/71/66.png: OK
+T262 7/71/65.png: OK
+T263 7/71/64.png: OK
+T264 7/71/63.png: OK
+T265 7/71/62.png: OK
+T266 7/71/61.png: OK
+T267 7/71/60.png: OK
+T268 7/71/59.png: OK
+T269 7/71/58.png: OK
+T270 7/71/57.png: OK
+T271 7/71/56.png: OK
+T272 7/71/55.png: OK
+T273 7/70/55.png: OK
+T274 7/69/55.png: OK
+T275 7/68/55.png: OK
+T276 7/67/55.png: OK
+T277 7/66/55.png: OK
+T278 7/65/55.png: OK
+T279 7/64/55.png: OK
+T280 7/63/55.png: OK
+T281 7/62/55.png: OK
+T282 7/61/55.png: OK
+T283 7/60/55.png: OK
+T284 7/59/55.png: OK
+T285 7/58/55.png: OK
+T286 7/57/55.png: OK
+T287 7/56/55.png: OK
+T288 7/55/55.png: OK
+T289 7/54/55.png: OK
+T290 7/54/56.png: OK
+T291 7/54/57.png: OK
+T292 7/54/58.png: OK
+
+Task will be stopped.
+Please wait some seconds...
+
+Please wait 3 seconds...
+Please wait 2 seconds...
+Please wait 1 seconds...
+
+Now time:05/09/2023 22:17:25
+Writing status file now...please wait...
+Write status file OK.
+
+--------------------------------
+Task Stopped!
+
+Now time:05/09/2023 22:17:25
+
+Log file has been saved as: 
+C:\Users\ludos\Desktop\TILES\OpenStreetMap Humanitarian\OpenStreetMap Humanitarian_log.txt

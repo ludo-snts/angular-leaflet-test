@@ -1,0 +1,237 @@
+[
+    {
+        "nom": "Tokyo",
+        "latitude": 35.682839,
+        "longitude": 139.759455
+    },
+    {
+        "nom": "New Delhi",
+        "latitude": 28.613939,
+        "longitude": 77.209021
+    },
+    {
+        "nom": "Cairo",
+        "latitude": 30.044419,
+        "longitude": 31.235711
+    },
+    {
+        "nom": "Paris",
+        "latitude": 48.856613,
+        "longitude": 2.352222
+    },
+    {
+        "nom": "Lima",
+        "latitude": -12.046374,
+        "longitude": -77.042793
+    },
+    {
+        "nom": "Buenos Aires",
+        "latitude": -34.611765,
+        "longitude": -58.417294
+    },
+    {
+        "nom": "Moscow",
+        "latitude": 55.755825,
+        "longitude": 37.617591
+    },
+    {
+        "nom": "Sydney",
+        "latitude": -33.865143,
+        "longitude": 151.209900
+    },
+    {
+        "nom": "Nairobi",
+        "latitude": -1.292066,
+        "longitude": 36.821946
+    },
+    {
+        "nom": "Mexico City",
+        "latitude": 19.432608,
+        "longitude": -99.133208
+    },
+    {
+        "nom": "Berlin",
+        "latitude": 52.520008,
+        "longitude": 13.404954
+    },
+    {
+        "nom": "Bangkok",
+        "latitude": 13.756331,
+        "longitude": 100.501762
+    },
+    {
+        "nom": "Johannesburg",
+        "latitude": -26.204103,
+        "longitude": 28.047305
+    },
+    {
+        "nom": "Lisbon",
+        "latitude": 38.722252,
+        "longitude": -9.139337
+    },
+    {
+        "nom": "Canberra",
+        "latitude": -35.307500,
+        "longitude": 149.124417
+    },
+    {
+        "nom": "Dakar",
+        "latitude": 14.692778,
+        "longitude": -17.446667
+    },
+    {
+        "nom": "Kuala Lumpur",
+        "latitude": 3.139003,
+        "longitude": 101.686855
+    },
+    {
+        "nom": "Rome",
+        "latitude": 41.902782,
+        "longitude": 12.496366
+    },
+    {
+        "nom": "Copenhagen",
+        "latitude": 55.676098,
+        "longitude": 12.568337
+    },
+    {
+        "nom": "Bogota",
+        "latitude": 4.609710,
+        "longitude": -74.081749
+    },
+    {
+        "nom": "Cape Town",
+        "latitude": -33.924870,
+        "longitude": 18.424056
+    },
+    {
+        "nom": "Hanoi",
+        "latitude": 21.028511,
+        "longitude": 105.854164
+    },
+    {
+        "nom": "Ottawa",
+        "latitude": 45.421530,
+        "longitude": -75.698116
+    },
+    {
+        "nom": "Ljubljana",
+        "latitude": 46.056946,
+        "longitude": 14.505751
+    },
+    {
+        "nom": "Kiev",
+        "latitude": 50.450001,
+        "longitude": 30.523333
+    },
+    {
+        "nom": "Wellington",
+        "latitude": -41.286461,
+        "longitude": 174.776230
+    },
+    {
+        "nom": "Stockholm",
+        "latitude": 59.329323,
+        "longitude": 18.068581
+    },
+    {
+        "nom": "Ankara",
+        "latitude": 39.933365,
+        "longitude": 32.859741
+    },
+    {
+        "nom": "Brussels",
+        "latitude": 50.850346,
+        "longitude": 4.351721
+    },
+    {
+        "nom": "Dublin",
+        "latitude": 53.349805,
+        "longitude": -6.260309
+    },
+    {
+        "nom": "Vienna",
+        "latitude": 48.208176,
+        "longitude": 16.373819
+    },
+    {
+        "nom": "Santiago",
+        "latitude": -33.448891,
+        "longitude": -70.669266
+    },
+    {
+        "nom": "Athens",
+        "latitude": 37.983810,
+        "longitude": 23.727539
+    },
+    {
+        "nom": "Amsterdam",
+        "latitude": 52.370216,
+        "longitude": 4.895168
+    },
+    {
+        "nom": "Oslo",
+        "latitude": 59.913868,
+        "longitude": 10.752245
+    },
+    {
+        "nom": "Copenhagen",
+        "latitude": 55.676098,
+        "longitude": 12.568337
+    },
+    {
+        "nom": "Nairobi",
+        "latitude": -1.292066,
+        "longitude": 36.821946
+    },
+    {
+        "nom": "Havana",
+        "latitude": 23.113592,
+        "longitude": -82.366592
+    },
+    {
+        "nom": "Kabul",
+        "latitude": 34.555349,
+        "longitude": 69.207486
+    },
+    {
+        "nom": "Islamabad",
+        "latitude": 33.684420,
+        "longitude": 73.047884
+    },
+    {
+        "nom": "Budapest",
+        "latitude": 47.497913,
+        "longitude": 19.040236
+    },
+    {
+        "nom": "Beijing",
+        "latitude": 39.904202,
+        "longitude": 116.407394
+    },
+    {
+        "nom": "Lima",
+        "latitude": -12.046374,
+        "longitude": -77.042793
+    },
+    {
+        "nom": "Bogota",
+        "latitude": 4.609710,
+        "longitude": -74.081749
+    },
+    {
+        "nom": "Wellington",
+        "latitude": -41.286461,
+        "longitude": 174.776230
+    },
+    {
+        "nom": "Dakar",
+        "latitude": 14.692778,
+        "longitude": -17.446667
+    },
+    {
+        "nom": "Kabul",
+        "latitude": 34.555349,
+        "longitude": 69.207486
+    }
+]
