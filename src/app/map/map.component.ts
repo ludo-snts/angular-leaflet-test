@@ -92,7 +92,7 @@ export class MapComponent implements AfterViewInit {
 
     // TODO comprendre pourquoi sans overlayMaps, le controle des couches ne s'affiche pas
     L.control.layers(baseMaps, overlayMaps, {
-      position: 'bottomleft' // Spécifiez la position en bas à gauche
+      position: 'bottomleft' // Spécifier la position en bas à gauche
     }).addTo(this.map);
 
 
@@ -145,10 +145,10 @@ export class MapComponent implements AfterViewInit {
     }
     );
 
-    // TEST: ajout d'un layerGroup pour la recherche) : OK OBSOLETE (BASCULE EN GEOJSON)
+    // TEST: ajout d'un layerGroup pour la recherche) : OK
     // var testLayer = L.layerGroup();
 
-    // TEST: créer markers a partir du fichier data.json et boucler sur les données pour créer les markers
+    // TEST: créer markers a partir du fichier data.json et boucler sur les données pour créer les markers : OK OBSOLETE (remplacé par geoJSON)
     //structure d'un element du json: {"nom": "Tokyo","latitude": 35.682839,"longitude": 139.759455}
     // les ajouter au layerGroup testLayer
     // fetch('./assets/data/data.json').then(res => res.json()).then(data => {
@@ -159,8 +159,7 @@ export class MapComponent implements AfterViewInit {
     //   });
     // }
     // );
-
-    //TEST: faire apparaitre le layerGroup testLayer avec l'input checkbox id="settings-markers" : OK
+    //TEST: faire apparaitre le layerGroup testLayer avec l'input checkbox id="settings-markers" : OK OBSOLETE (remplacé par geoJSON)
     // const settingsMarkers = document.getElementById('settings-markers');
     // settingsMarkers?.addEventListener('change', (event) => {
     //   if (event.target instanceof HTMLInputElement) {
@@ -174,7 +173,7 @@ export class MapComponent implements AfterViewInit {
 
     //TEST: La même chose avec un fichier geoJSON
     //structure d'un element du geoJSON: {"properties": {"country": "Bangladesh","city": "Dhaka","tld": "bd","iso3": "BGD","iso2": "BD"},"geometry": {"coordinates": [90.24, 23.43], "type": "Point"},"id": "BD"}
-    // les ajouter au layerGroup geoJSONLayer
+    // les ajouter au layerGroup geoJSONLayer : OK
     var geoJSONLayer = L.layerGroup();
     fetch('./assets/data/capitals.geojson')
       .then(res => res.json())
@@ -187,7 +186,7 @@ export class MapComponent implements AfterViewInit {
     }
     );
 
-    //TEST: faire apparaitre le layerGroup geoJSONLayer avec l'input checkbox id="settings-markers"
+    //TEST: faire apparaitre le layerGroup geoJSONLayer avec l'input checkbox id="settings-markers" : OK
     const settingsMarkers = document.getElementById('settings-markers');
     settingsMarkers?.addEventListener('change', (event) => {
       if (event.target instanceof HTMLInputElement) {
@@ -200,7 +199,7 @@ export class MapComponent implements AfterViewInit {
     }
     );
 
-    //TEST: ajout d'un layerGroup pour les frontières (geoJSON)
+    //TEST: ajout d'un layerGroup pour les frontières (geoJSON) : OK
     var frontiersLayer = L.geoJSON();
     fetch('assets/data/world.geojson')
     .then(response => response.json())
@@ -220,7 +219,7 @@ export class MapComponent implements AfterViewInit {
       }).addTo(frontiersLayer);
     });
 
-    //TEST: faire apparaitre le layerGroup frontiersLayer avec l'input checkbox id="settings-frontiers"
+    //TEST: faire apparaitre le layerGroup frontiersLayer avec l'input checkbox id="settings-frontiers" : OK
     const settingsFrontiers = document.getElementById('settings-frontiers');
     settingsFrontiers?.addEventListener('change', (event) => {
       if (event.target instanceof HTMLInputElement) {
@@ -233,42 +232,49 @@ export class MapComponent implements AfterViewInit {
     }
     );
 
-        //TEST: ajout d'un layerGroup pour les lacs (geoJSON)
-        var lakesLayer = L.geoJSON();
-        fetch('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_10m_lakes.geojson')
-        .then(response => response.json())
-        .then(data => {
-          // Ajoutez chaque entité GeoJSON à la couche
-          L.geoJSON(data, {
-            style: {
-              color: "blue", // Couleur des lignes à blanc
-              weight: 1,      // Épaisseur des lignes en pixels
-              opacity: 1,     // Opacité des lignes (0 à 1)
-              fillOpacity: 0.3 // Opacité de remplissage des polygones (0 à 1)
-            },
-            // onEachFeature: function (feature, layer) {
-            //   // Créez une popup avec le nom du département pour chaque entité
-            //   layer.bindPopup(feature.properties.nom);
-            // }
-          }).addTo(lakesLayer);
-        });
-    
-        //TEST: faire apparaitre le layerGroup lakesLayer avec l'input checkbox id="settings-lakes"
-        const settingsLakes = document.getElementById('settings-lakes');
-        settingsLakes?.addEventListener('change', (event) => {
-          if (event.target instanceof HTMLInputElement) {
-            if (event.target.checked) {
-              lakesLayer.addTo(this.map);
-            } else {
-              lakesLayer.remove();
-            }
-          }
+    //TEST: ajout d'un layerGroup pour les lacs (geoJSON) : OK
+    var lakesLayer = L.geoJSON();
+    fetch('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_10m_lakes.geojson')
+    .then(response => response.json())
+    .then(data => {
+      // Ajoutez chaque entité GeoJSON à la couche
+      L.geoJSON(data, {
+        style: {
+          color: "blue", // Couleur des lignes à blanc
+          weight: 1,      // Épaisseur des lignes en pixels
+          opacity: 1,     // Opacité des lignes (0 à 1)
+          fillOpacity: 0.3 // Opacité de remplissage des polygones (0 à 1)
+        },
+        // onEachFeature: function (feature, layer) {
+        //   // Créez une popup avec le nom du département pour chaque entité
+        //   layer.bindPopup(feature.properties.nom);
+        // }
+      }).addTo(lakesLayer);
+    });
+
+    //TEST: faire apparaitre le layerGroup lakesLayer avec l'input checkbox id="settings-lakes" : OK
+    const settingsLakes = document.getElementById('settings-lakes');
+    settingsLakes?.addEventListener('change', (event) => {
+      if (event.target instanceof HTMLInputElement) {
+        if (event.target.checked) {
+          lakesLayer.addTo(this.map);
+        } else {
+          lakesLayer.remove();
         }
-        );
+      }
+    }
+    );
+
+    //TEST: ajout d'une fonction de recherche leaflet-search : KO
+    // var searchLayer = L.layerGroup().addTo(this.map);
+    // //... adding data in searchLayer ...
+    // this.map.addControl( new L.Control.Search({layer: searchLayer}) );
+    // //searchLayer is a L.LayerGroup contains searched markers
+
+    
 
 
-
-  }
+  } // fin de la fonction initMap()
 
 
 
@@ -323,6 +329,60 @@ export class MapComponent implements AfterViewInit {
     this.showSearch = !this.showSearch;
   }
 
+  //TEST: Fonction de recherche dans les fichier geoJSON via le champs de saisie de l'input id="search-input" : EN COURS
+  search(): void {
+    // Récupérer la valeur de l'input
+    const searchInput = document.getElementById('search-input') as HTMLInputElement;
+    const searchValue = searchInput.value;
+
+    // Si la valeur de l'input est vide, ne rien faire
+    if (searchValue === '') {
+      return;
+    }
+
+    // Si la valeur de l'input n'est pas vide, rechercher dans le fichier geoJSON
+    fetch('./assets/data/capitals.geojson')
+      .then(res => res.json())
+      .then(data => {
+        // Créer un tableau vide pour stocker les résultats de la recherche
+        const searchResults: any[] = []; 
+        console.log(searchValue) //OK 
+
+        
+        // Boucler sur les données du fichier geoJSON
+        data.features.forEach((element: { properties?: { city?: string }; geometry: { coordinates: number[] } }) => {
+          // Check if element.properties and element.properties.city exist
+          if (element.properties?.city?.toLowerCase().includes(searchValue.toLowerCase())) {
+            searchResults.push(element);
+            console.table(element); //OK
+          }
+        });
+
+        // Si le tableau des résultats est vide, afficher un message d'erreur
+        if (searchResults.length === 0) {
+          alert('Aucun résultat trouvé');
+          return;
+        }
+
+        //TODO On en est là
+        // Si le tableau des résultats n'est pas vide, afficher les résultats sur la carte
+        // Créer un layerGroup pour stocker les résultats de la recherche
+        const searchResultsLayer = L.layerGroup();
+        
+        // Boucler sur les résultats de la recherche
+        searchResults.forEach((element: { properties: { city: string; }; geometry: { coordinates: number[]; }; }) => {
+          // Créer un marqueur pour chaque résultat
+          const marker = L.marker([element.geometry.coordinates[1], element.geometry.coordinates[0]]);
+          // Ajouter le marqueur au layerGroup
+          marker.addTo(searchResultsLayer);
+        });
+        
+        // Ajouter le layerGroup à la carte
+        searchResultsLayer.addTo(this.map);
+      });
+  }
+
+  
 
 
 

@@ -7,14 +7,18 @@
                 <img src="./assets/icons/chevron-left-solid.svg">
             </button>
             <!--recherche-->
-            <!--<div class="search-container">
+            <div class="search-container">
                 <button class="search-btn" (click)="toggleSearch()" >
                     <img src="./assets/icons/magnifying-glass-solid.svg">
                 </button>
                 <div class="search-input-wrapper" [ngClass]="{'show': showSearch}">
-                    <input type="text" class="search-input">
+                    <input type="text" id="search-input" class="search-input">
                 </div>
-            </div>-->
+                <!--bouton valider-->
+                <button class="search-validate-btn" (click)="search()" >
+                    GO
+                </button>
+            </div>
             <!--réglages-->
             <div class="settings-container">
                 <button class="settings-btn" (click)="toggleSettings()" >
