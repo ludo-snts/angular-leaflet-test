@@ -4,13 +4,11 @@
 
 /* Leaflet */
 .custom-pin img {
-    height: 3.5rem;
-    width: 3.5rem !important;
-    border-radius: 2rem;
-    background-color: #F28B25;
+    height: 30px;
+    width: 30px !important;
     border: none !important;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     object-fit: cover;
+    position: relative;
 
 }
 
@@ -231,25 +229,33 @@ height: 60%;
 }
 
 /* REGLAGES */
+* {--settings-width: 10rem;}
 /* bouton réglages + conteneur des différents réglages */
 .settings-container {
     z-index: 999;
+    /* position: absolute;
+    right: 1rem; */
+    margin-inline: 1rem !important;
+    overflow: hidden;
+    height: 50px;
+    width: fit-content;
     display: flex;
-    flex-direction: column;
+    flex-direction: row-reverse;
+    background-color: #fff;
+    border-radius: 25px;
 }
 /* bouton réglages */
 .settings-btn {
     background-color: #F28B25;
-    padding: 0 !important;
-    margin-inline: 1rem !important;
-    border: none !important;
-    min-height: 50px;
-    min-width: 50px;
+    z-index: 999;
     height: 50px;
     width: 50px;
+    min-width: 50px;
     border-radius: 25px;
+    margin: 0 !important;
+    padding: 0 !important;
+    border : none !important;
     cursor: pointer;
-    z-index: 999;
 }
 .settings-btn img {
     height: 100%;
@@ -257,71 +263,59 @@ height: 60%;
 }
 /*conteneur des différents réglages */
 .settings-wrapper {
-    position: fixed;
-    top: 5rem;
-    right: 1rem;
-    height: 15vh;
-    width: 15rem;
-    border: 4px solid #FFF3E7 !important;
-    border-radius: 25px;
-    background-color: #FFF3E7;
-    z-index: 999;
-    display: flex;
-    flex-direction: flex;
-    justify-content:center;
-    align-items: start;
-    /* padding: 1rem; */
-    transition: transform .5s ease-in-out;
-    overflow: hidden;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !important;
-}
-.settings-wrapper {
-    opacity: 0; /* Initiallement invisible */
-    transition: opacity 0.3s ease; /* Transition douce sur l'opacité */
+    display: none;
 }
 .settings-wrapper.show {
-    opacity: 1; /* Rendre visible */
+    display: block;
+    border: none !important;
 }
-
-.settings-maptype-container {
-    background-color: #fff;
+.settings-markers-container {
     height: 100%;
-    width : 3rem;
+    width : var(--settings-width);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    border-radius: 25px;
-    margin-right: 4px;
+    animation: settings-slide-left .4s ease-in-out;
+
 }
-.settings-maptype-radio{
+
+.settings-markers-container input {
     display: none !important;
 }
 
-.settings-maptype-container img {
+.settings-markers-img {
     height: 30px;
     width: 30px;
+    margin-inline: .2rem;
     cursor: pointer;
     opacity: .5;
     transition: all 0.3s;
 }
 
-.settings-maptype-container img:hover {
+.settings-markers-img:hover {
     opacity: 1;
     transition: all 0.3s;
 }
 
-.settings-maptype-radio:checked + label .settings-maptype-label-img {
+.settings-markers-container input:checked + label .settings-markers-img {
     opacity: 1;
 }
 
-.settings-othertype-container {
-    background-color: #fff;
-    height: 100%;
-    width : 100%;
-    border-radius: 25px;
+@keyframes settings-slide-left {
+    0% {
+        width : 0;
+    }
+    60% {
+        width: calc(var(--settings-width) + .5rem);
+    }
+    80% {
+        width: calc(var(--settings-width) - .5rem) 
+    }
+    100% {
+        width: var(--settings-width);
+    }
 }
-
 
 /* RETOUR */
 .return-btn {
@@ -454,6 +448,10 @@ height: 60%;
 }
 
 .leaflet-control-layers-base label:nth-child(4){
+    background-image: url(./assets/icons/floppy-disk-solid-bk.svg);
+}
+
+.leaflet-control-layers-base label:nth-child(5){
     background-image: url(./assets/icons/floppy-disk-solid-bk.svg);
 }
 

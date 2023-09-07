@@ -21,7 +21,19 @@
                     <img src="./assets/icons/sliders-solid.svg">
                 </button>
                 <div class="settings-wrapper" [ngClass]="{'show': showSettings}">
-                    <div class="settings-othertype-container"></div>
+                    <div class="settings-markers-container">
+                        <input type="checkbox" id="settings-markers" class="settings-markers-input" name="settings-markers" value="markers">
+                        <label for="settings-markers">
+                            <img class="settings-markers-img" src="./assets/icons/map-pin-solid.svg">
+                        </label>
+                        <input type="checkbox" id="settings-frontiers" class="settings-markers-input" name="settings-markers" value="markers">
+                        <label for="settings-frontiers">
+                            <img class="settings-markers-img" src="./assets/icons/globe-solid.svg">
+                        </label>
+                        <input type="checkbox" id="settings-lakes" class="settings-markers-input" name="settings-markers" value="markers">
+                        <label for="settings-lakes">
+                            <img class="settings-markers-img" src="./assets/icons/water-solid.svg">
+                        </label>
                 </div>
             </div>
             <!--géolocalisation--> 

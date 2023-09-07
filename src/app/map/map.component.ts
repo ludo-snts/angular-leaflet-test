@@ -18,14 +18,16 @@ export class MapComponent implements AfterViewInit {
 
   // Initialisation à false pour cacher settings-wrapper
   public showSettings = false;
-    // Initialisation à false pour cacher search-input-container
-    public showSearch = false;
+  // Initialisation à false pour cacher search-input-container
+  public showSearch = false;
+
 
   // Initialisation des tuiles
-  private defaultTiles!: L.TileLayer;
-  private satelliteTiles!: L.TileLayer;
-  private OSM01Tiles!: L.TileLayer;
-  private OSM02Tiles!: L.TileLayer;
+  private defaultTiles!: L.TileLayer; // tuiles par défaut (tuiles openStreetMap en ligne)
+  private satelliteTiles!: L.TileLayer; // tuiles satellite (tuiles openStreetMap en ligne)
+  private OSM01Tiles!: L.TileLayer; // tuiles (version de base) tuiles stockées en local dans le dossier assets/tiles/openStreetMap01
+  private OSM02Tiles!: L.TileLayer; // tuiles (version humanitaire) tuiles stockées en local dans le dossier assets/tiles/openStreetMap02
+  private USGSSatelliteTiles!: L.TileLayer; // tuiles (version satellite) tuiles stockées en local dans le dossier assets/tiles/USGSNationalMapSatellite
 
   // Initialisation de la variable de zoom
   public currentZoomLevel: number = 7; // Initialisez-la avec la valeur de zoom par défaut
@@ -44,11 +46,11 @@ export class MapComponent implements AfterViewInit {
       minZoom: 1,
     });
 
-        // initialisation des tuiles par défaut (tuiles openStreetMap en ligne)
-        this.satelliteTiles = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-          maxZoom: 18,
-          minZoom: 1,
-        });
+    // initialisation des tuiles par défaut (tuiles openStreetMap en ligne)
+    this.satelliteTiles = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      maxZoom: 18,
+      minZoom: 1,
+    });
 
     // initialisation des tuiles (version de base) tuiles stockées en local dans le dossier assets/tiles/openStreetMap01
     this.OSM01Tiles = L.tileLayer('assets/tiles/openStreetMap01/{z}/{x}/{y}.png', {
@@ -56,11 +58,17 @@ export class MapComponent implements AfterViewInit {
       minZoom: 1,
     });
 
-      // initialisation des tuiles (version humanitaire) tuiles stockées en local dans le dossier assets/tiles/openStreetMap02
-      this.OSM02Tiles = L.tileLayer('assets/tiles/openStreetMap02/{z}/{x}/{y}.png', {
-        maxZoom: 7,
-        minZoom: 1,
-      });
+    // initialisation des tuiles (version humanitaire) tuiles stockées en local dans le dossier assets/tiles/openStreetMap02
+    this.OSM02Tiles = L.tileLayer('assets/tiles/openStreetMap02/{z}/{x}/{y}.png', {
+      maxZoom: 7,
+      minZoom: 1,
+    });
+
+    // initialisation des tuiles (version satellite) tuiles stockées en local dans le dossier assets/tiles/USGSNationalMapSatellite
+    this.USGSSatelliteTiles = L.tileLayer('assets/tiles/USGSNationalMapSatellite/{z}/{x}/{y}.jpg', {
+      maxZoom: 7,
+      minZoom: 1,
+    });
 
 
 
@@ -68,12 +76,14 @@ export class MapComponent implements AfterViewInit {
     // customTiles.addTo(this.map);
     this.defaultTiles.addTo(this.map);
 
+
     // ajout du controle des couches (tuiles)
     const baseMaps= {
       " ":this.defaultTiles,
       "  ":this.satelliteTiles,
       "   ":this.OSM01Tiles,
       "    ":this.OSM02Tiles,
+      "     ":this.USGSSatelliteTiles
     };
 
     // ajout du controle des couches (tuiles) bis
@@ -120,11 +130,9 @@ export class MapComponent implements AfterViewInit {
 
     // TEST: ajout d'un marqueur personnalisé sur la carte : OK
     const icon = L.divIcon({
-      // iconUrl: 'https://mind-and-go.com/web/image/website/1/logo?unique=f12e26c',
-      // iconUrl: 'https://mind-and-go.com/favicon.ico',
-      html: "<div class='custom-pin'><img src='./assets/icons/ludo.png'></img></div>",
-      // iconSize: [40, 40],
-      // iconAnchor: [ 13, 41 ]
+      html: "<div class='custom-pin'><img src='./assets/icons/map-pin-solid.svg'></img></div>",
+      // iconSize: [30, 30],
+      iconAnchor: [ 15, 30 ]
     });
     // const marker = L.marker([42.69607784382969, 2.8892290890216943], { icon }); // définir la position du marqueur
     // marker.bindPopup('<b>Hello !</b>'); // ajouter un popup au marqueur
@@ -137,32 +145,129 @@ export class MapComponent implements AfterViewInit {
     }
     );
 
-    // TEST: ajout d'un layerGroup pour la recherche) : OK
-    var searchLayer = L.layerGroup().addTo(this.map);
+    // TEST: ajout d'un layerGroup pour la recherche) : OK OBSOLETE (BASCULE EN GEOJSON)
+    // var testLayer = L.layerGroup();
+
     // TEST: créer markers a partir du fichier data.json et boucler sur les données pour créer les markers
     //structure d'un element du json: {"nom": "Tokyo","latitude": 35.682839,"longitude": 139.759455}
-    // les ajouter au layerGroup searchLayer
-    fetch('./assets/data/data.json').then(res => res.json()).then(data => {
-      data.forEach((element: { nom: string; latitude: number; longitude: number; }) => {
-        const marker = L.marker([element.latitude, element.longitude], { icon });
-        marker.bindPopup(element.nom);
-        marker.addTo(searchLayer);
+    // les ajouter au layerGroup testLayer
+    // fetch('./assets/data/data.json').then(res => res.json()).then(data => {
+    //   data.forEach((element: { nom: string; latitude: number; longitude: number; }) => {
+    //     const marker = L.marker([element.latitude, element.longitude], { icon });
+    //     marker.bindPopup(element.nom);
+    //     marker.addTo(testLayer);
+    //   });
+    // }
+    // );
+
+    //TEST: faire apparaitre le layerGroup testLayer avec l'input checkbox id="settings-markers" : OK
+    // const settingsMarkers = document.getElementById('settings-markers');
+    // settingsMarkers?.addEventListener('change', (event) => {
+    //   if (event.target instanceof HTMLInputElement) {
+    //     if (event.target.checked) {
+    //       testLayer.addTo(this.map);
+    //     } else {
+    //       testLayer.remove();
+    //     }
+    //   }
+    // });
+
+    //TEST: La même chose avec un fichier geoJSON
+    //structure d'un element du geoJSON: {"properties": {"country": "Bangladesh","city": "Dhaka","tld": "bd","iso3": "BGD","iso2": "BD"},"geometry": {"coordinates": [90.24, 23.43], "type": "Point"},"id": "BD"}
+    // les ajouter au layerGroup geoJSONLayer
+    var geoJSONLayer = L.layerGroup();
+    fetch('./assets/data/capitals.geojson')
+      .then(res => res.json())
+      .then(data => {
+        data.features.forEach((element: { properties: { city: string; }; geometry: { coordinates: number[]; }; }) => {
+          const marker = L.marker([element.geometry.coordinates[1], element.geometry.coordinates[0]], { icon });
+          marker.bindPopup(element.properties.city);
+          marker.addTo(geoJSONLayer);
       });
     }
     );
-    //TEST/ ajout d'une searchbar avec leaflet-search : EN COURS
-    // this.map.addControl( new L.Control.Search({layer: searchLayer}) );
-    this.map.addControl( new L.Control.Search({
-      layer: searchLayer, 
-      initial: false, 
-      propertyName: 'nom',
-      zoom: 7,
-      marker: false,
-      textPlaceholder: 'Rechercher une ville',
-      textErr: 'Ville non trouvée',
-      textCancel: 'Annuler',
-      
-    }) );
+
+    //TEST: faire apparaitre le layerGroup geoJSONLayer avec l'input checkbox id="settings-markers"
+    const settingsMarkers = document.getElementById('settings-markers');
+    settingsMarkers?.addEventListener('change', (event) => {
+      if (event.target instanceof HTMLInputElement) {
+        if (event.target.checked) {
+          geoJSONLayer.addTo(this.map);
+        } else {
+          geoJSONLayer.remove();
+        }
+      }
+    }
+    );
+
+    //TEST: ajout d'un layerGroup pour les frontières (geoJSON)
+    var frontiersLayer = L.geoJSON();
+    fetch('assets/data/world.geojson')
+    .then(response => response.json())
+    .then(data => {
+      // Ajoutez chaque entité GeoJSON à la couche
+      L.geoJSON(data, {
+        style: {
+          color: "white", // Couleur des lignes à blanc
+          weight: 1,      // Épaisseur des lignes en pixels
+          opacity: 1,     // Opacité des lignes (0 à 1)
+          fillOpacity: 0.1 // Opacité de remplissage des polygones (0 à 1)
+        },
+        // onEachFeature: function (feature, layer) {
+        //   // Créez une popup avec le nom du département pour chaque entité
+        //   layer.bindPopup(feature.properties.nom);
+        // }
+      }).addTo(frontiersLayer);
+    });
+
+    //TEST: faire apparaitre le layerGroup frontiersLayer avec l'input checkbox id="settings-frontiers"
+    const settingsFrontiers = document.getElementById('settings-frontiers');
+    settingsFrontiers?.addEventListener('change', (event) => {
+      if (event.target instanceof HTMLInputElement) {
+        if (event.target.checked) {
+          frontiersLayer.addTo(this.map);
+        } else {
+          frontiersLayer.remove();
+        }
+      }
+    }
+    );
+
+        //TEST: ajout d'un layerGroup pour les lacs (geoJSON)
+        var lakesLayer = L.geoJSON();
+        fetch('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_10m_lakes.geojson')
+        .then(response => response.json())
+        .then(data => {
+          // Ajoutez chaque entité GeoJSON à la couche
+          L.geoJSON(data, {
+            style: {
+              color: "blue", // Couleur des lignes à blanc
+              weight: 1,      // Épaisseur des lignes en pixels
+              opacity: 1,     // Opacité des lignes (0 à 1)
+              fillOpacity: 0.3 // Opacité de remplissage des polygones (0 à 1)
+            },
+            // onEachFeature: function (feature, layer) {
+            //   // Créez une popup avec le nom du département pour chaque entité
+            //   layer.bindPopup(feature.properties.nom);
+            // }
+          }).addTo(lakesLayer);
+        });
+    
+        //TEST: faire apparaitre le layerGroup lakesLayer avec l'input checkbox id="settings-lakes"
+        const settingsLakes = document.getElementById('settings-lakes');
+        settingsLakes?.addEventListener('change', (event) => {
+          if (event.target instanceof HTMLInputElement) {
+            if (event.target.checked) {
+              lakesLayer.addTo(this.map);
+            } else {
+              lakesLayer.remove();
+            }
+          }
+        }
+        );
+
+
+
   }
 
 
@@ -206,17 +311,22 @@ export class MapComponent implements AfterViewInit {
 
   }
 
-  // fonction accompagnant l'apparition/disparition du menu réglages':
+  // fonction accompagnant l'apparition/disparition du menu réglages:
   toggleSettings(): void {
     // Inverser la valeur actuelle de showSettings
     this.showSettings = !this.showSettings;
   }
 
-    // fonction accompagnant l'apparition/disparition de l'input de recherche':
-    toggleSearch(): void {
-      // Inverser la valeur actuelle de showSearch
-      this.showSearch = !this.showSearch;
-    }
+  // fonction accompagnant l'apparition/disparition de l'input de recherche:
+  toggleSearch(): void {
+    // Inverser la valeur actuelle de showSearch
+    this.showSearch = !this.showSearch;
+  }
+
+
+
+
+
   
 
   constructor() {
