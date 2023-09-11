@@ -12,12 +12,12 @@
                     <img src="./assets/icons/magnifying-glass-solid.svg">
                 </button>
                 <div class="search-input-wrapper" [ngClass]="{'show': showSearch}">
-                    <input type="text" id="search-input" class="search-input">
+                    <input type="text" id="search-input" class="search-input" (keydown)="searchEnter($event)">
+                    <!--bouton valider-->
+                    <button class="search-validate-btn" (click)="search()">
+                        GO
+                    </button>
                 </div>
-                <!--bouton valider-->
-                <button class="search-validate-btn" (click)="search()" >
-                    GO
-                </button>
             </div>
             <!--réglages-->
             <div class="settings-container">

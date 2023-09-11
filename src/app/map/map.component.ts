@@ -1,6 +1,5 @@
 import { Component, AfterViewInit, NgZone } from '@angular/core';
 import * as L from 'leaflet';
-import 'leaflet-search';
 
 
 @Component({
@@ -317,23 +316,35 @@ export class MapComponent implements AfterViewInit {
 
   }
 
-  // fonction accompagnant l'apparition/disparition du menu réglages:
+  // fonction accompagnant l'apparition/disparition du menu réglages: OK
   toggleSettings(): void {
     // Inverser la valeur actuelle de showSettings
     this.showSettings = !this.showSettings;
   }
 
-  // fonction accompagnant l'apparition/disparition de l'input de recherche:
+  // fonction accompagnant l'apparition/disparition de l'input de recherche: OK
   toggleSearch(): void {
     // Inverser la valeur actuelle de showSearch
     this.showSearch = !this.showSearch;
   }
 
-  //TEST: Fonction de recherche dans les fichier geoJSON via le champs de saisie de l'input id="search-input" : EN COURS
+  //fonction accompagnant l'appui sur Entrée dans la barre de recherche : OK
+  searchEnter(event: KeyboardEvent): void {
+    const { key } = event;
+    if (key === 'Enter') {
+      this.search();
+    }
+  }
+
+
+  //TEST: Fonction de recherche dans les fichier geoJSON via le champs de saisie de l'input id="search-input" : OK
+  //TODO Pour le moment, affiche tous les résultats possibles contenant le terme de la recherche (searchValue) -> afficher seulement le résultat quand le terme correspond completement a la recherche (ex: "Paris")
+  //TODO Lorsque j'enchaine les recherches, le résultat de la recherche précédente reste affiché -> supprimer le résultat de la recherche précédente sans réinitialiser la carte
   search(): void {
     // Récupérer la valeur de l'input
     const searchInput = document.getElementById('search-input') as HTMLInputElement;
     const searchValue = searchInput.value;
+    // console.log('recherche :' + searchValue) //OK
 
     // Si la valeur de l'input est vide, ne rien faire
     if (searchValue === '') {
@@ -345,17 +356,23 @@ export class MapComponent implements AfterViewInit {
       .then(res => res.json())
       .then(data => {
         // Créer un tableau vide pour stocker les résultats de la recherche
-        const searchResults: any[] = []; 
-        console.log(searchValue) //OK 
+        const searchResults: any[] = [];
 
-        
+
         // Boucler sur les données du fichier geoJSON
         data.features.forEach((element: { properties?: { city?: string }; geometry: { coordinates: number[] } }) => {
           // Check if element.properties and element.properties.city exist
           if (element.properties?.city?.toLowerCase().includes(searchValue.toLowerCase())) {
             searchResults.push(element);
-            console.table(element); //OK
+            // console.table(searchResults); //OK
           }
+        });
+        
+        // Icone personalisée
+        const iconSearch = L.divIcon({
+          html: "<div class='custom-pin'><img src='./assets/icons/thumbtack-solid.svg'></img></div>",
+          // iconSize: [30, 30],
+          iconAnchor: [ 15, 30 ]
         });
 
         // Si le tableau des résultats est vide, afficher un message d'erreur
@@ -363,22 +380,28 @@ export class MapComponent implements AfterViewInit {
           alert('Aucun résultat trouvé');
           return;
         }
-
-        //TODO On en est là
-        // Si le tableau des résultats n'est pas vide, afficher les résultats sur la carte
+        // Si le tableau des résultats n'est pas vide, afficher les résultats sur la carte:
         // Créer un layerGroup pour stocker les résultats de la recherche
         const searchResultsLayer = L.layerGroup();
-        
-        // Boucler sur les résultats de la recherche
+
+        // Boucler sur les résultats de la recherche 
         searchResults.forEach((element: { properties: { city: string; }; geometry: { coordinates: number[]; }; }) => {
-          // Créer un marqueur pour chaque résultat
-          const marker = L.marker([element.geometry.coordinates[1], element.geometry.coordinates[0]]);
+          // Créer un marqueur pour le résultat
+          const marker = L.marker([element.geometry.coordinates[1], element.geometry.coordinates[0]], { icon: iconSearch });
+          //ajout popup indiquant le nom de la ville
+          marker.bindPopup(element.properties.city);
           // Ajouter le marqueur au layerGroup
           marker.addTo(searchResultsLayer);
+          // console.table (searchResultsLayer); //OK
+
         });
+
         
         // Ajouter le layerGroup à la carte
         searchResultsLayer.addTo(this.map);
+
+        //placer la vue de la carte sur le marqueur
+        this.map.setView([searchResults[0].geometry.coordinates[1], searchResults[0].geometry.coordinates[0]], 7);
       });
   }
 
