@@ -3121,5 +3121,20 @@
             "type": "Point"
         },
         "id": "MZ"
-    }]
+    }, {
+        "properties": {
+            "country": "Null Island",
+            "city": "Null",
+            "tld": "null",
+            "iso3": "NULL",
+            "iso2": "NULL"
+        },
+        "geometry": {
+            "coordinates": [0, 0],
+            "type": "Point"
+        },
+        "id": "NULL"
+    }
+
+]
 }

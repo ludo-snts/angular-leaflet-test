@@ -8,15 +8,15 @@
             </button>
             <!--recherche-->
             <div class="search-container">
-                <button class="search-btn" (click)="toggleSearch()" >
+                <button class="search-btn" (click)="showSearch ? search() : toggleSearch()">
                     <img src="./assets/icons/magnifying-glass-solid.svg">
                 </button>
                 <div class="search-input-wrapper" [ngClass]="{'show': showSearch}">
                     <input type="text" id="search-input" class="search-input" (keydown)="searchEnter($event)">
                     <!--bouton valider-->
-                    <button class="search-validate-btn" (click)="search()">
+                    <!--<button class="search-validate-btn" (click)="search()">
                         GO
-                    </button>
+                    </button>-->
                 </div>
             </div>
             <!--réglages-->
@@ -30,13 +30,17 @@
                         <label for="settings-markers">
                             <img class="settings-markers-img" src="./assets/icons/map-pin-solid.svg">
                         </label>
-                        <input type="checkbox" id="settings-frontiers" class="settings-markers-input" name="settings-markers" value="markers">
+                        <!--<input type="checkbox" id="settings-frontiers" class="settings-markers-input" name="settings-markers" value="markers">
                         <label for="settings-frontiers">
                             <img class="settings-markers-img" src="./assets/icons/globe-solid.svg">
-                        </label>
+                        </label>-->
                         <input type="checkbox" id="settings-lakes" class="settings-markers-input" name="settings-markers" value="markers">
                         <label for="settings-lakes">
                             <img class="settings-markers-img" src="./assets/icons/water-solid.svg">
+                        </label>
+                        <input type="checkbox" id="settings-countries" class="settings-markers-input" name="settings-markers" value="markers">
+                        <label for="settings-countries">
+                            <img class="settings-markers-img" src="./assets/icons/globe-solid.svg">
                         </label>
                 </div>
             </div>
@@ -50,4 +54,20 @@
             </div>
         </div>   
     </div>
+    <!--message info/erreur-->
+    <div class="message-container" *ngIf="message">
+        <div class="message-container-bg"></div>
+        <div class="message-popup">
+            <span class="message-text">
+                {{ message }} 
+                <img src="./assets/icons/robot-astromech-solid.svg">
+                <img src="./assets/icons/robot-protocol-solid.svg">
+
+            </span>
+            <button class="close-button" (click)="closeMessage()">
+                <img src="./assets/icons/xmark-solid.svg">
+            </button>
+        </div>
+    </div>
+
 </div>

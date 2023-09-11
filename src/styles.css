@@ -170,7 +170,7 @@ height: 60%;
     height: 50px;
     width: fit-content;
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     background-color: #fff;
     border-radius: 25px;
 }
@@ -208,13 +208,13 @@ height: 60%;
         width : 0;
     }
     60% {
-        width: calc(var(--search-width) + .5rem + 50px);
+         width: calc(var(--search-width)  + .5rem ); /* largeur de la zone de recherche + largeur du bouton GO + un peu de rab */
     }
     80% {
-        width: calc(var(--search-width) - .5rem + 50px) 
+        width: calc(var(--search-width)  - .5rem ) /* largeur de la zone de recherche + largeur du bouton GO - un peu de gras */
     }
     100% {
-        width: calc(var(--search-width) + 50px);
+        width: calc(var(--search-width) ); /* largeur de la zone de recherche + largeur du bouton GO  et c'est tout */
     }
 }
 
@@ -228,7 +228,13 @@ height: 60%;
     height: 100%;
 }
 
+/* Enlever la bordure bleu de la zone de recherche quand on clique dessus (pour le focus) */
+.search-input:focus-visible {
+    outline: none;
+}
+
 .search-validate-btn {
+    display: none;
     background-color: #F28B25;
     color : #FFF;
     font-weight: 700;
@@ -469,6 +475,82 @@ height: 60%;
     background-image: url(./assets/icons/floppy-disk-solid-bk.svg);
 }
 
+/* MESSAGE */
+.message-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    height: 100%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    padding : 1rem;
+    z-index: 1000;
+}
+
+.message-container-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.message-popup {
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccc;
+    padding-inline: 1rem;
+    max-width: 400px;
+    height: 50px;
+    border-radius: 3rem;
+    position: fixed;
+    z-index: 1001;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.message-text {
+    margin: .5rem;
+    display : flex;
+    align-items: baseline;
+    justify-content: center;
+
+}
+
+.message-text img:nth-child(1) {
+    width: 1rem;
+    height: 1rem;
+    margin-left: .5rem;
+}
+.message-text img:nth-child(2) {
+    width: 1rem;
+    height: 1.5rem;
+}
+
+.close-button {
+    position: absolute;
+    top: -14px;
+    right: -12px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #888;
+    background: none;
+    border: none;
+}
+
+.close-button img {
+    width: 1rem;
+    height: 1rem;
+}
+
+.close-button:hover {
+    color: #333;
+}
+
 /* MISC */
 .leaflet-control-attribution {
     /* cacher le logo leaflet */
@@ -478,7 +560,3 @@ height: 60%;
 }
 
 /* TEST */
-
-
-
-

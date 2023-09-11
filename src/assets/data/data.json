@@ -234,4 +234,9 @@
         "latitude": 34.555349,
         "longitude": 69.207486
     }
+    {
+        "nom": "Test",
+        "latitude": 0,
+        "longitude": 0
+    }
 ]

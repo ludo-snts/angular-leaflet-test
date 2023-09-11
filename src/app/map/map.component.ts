@@ -20,6 +20,9 @@ export class MapComponent implements AfterViewInit {
   // Initialisation à false pour cacher search-input-container
   public showSearch = false;
 
+  //inialisation du message d'info/erreur
+  public message: string = '';
+
 
   // Initialisation des tuiles
   private defaultTiles!: L.TileLayer; // tuiles par défaut (tuiles openStreetMap en ligne)
@@ -198,38 +201,38 @@ export class MapComponent implements AfterViewInit {
     }
     );
 
-    //TEST: ajout d'un layerGroup pour les frontières (geoJSON) : OK
-    var frontiersLayer = L.geoJSON();
-    fetch('assets/data/world.geojson')
-    .then(response => response.json())
-    .then(data => {
-      // Ajoutez chaque entité GeoJSON à la couche
-      L.geoJSON(data, {
-        style: {
-          color: "white", // Couleur des lignes à blanc
-          weight: 1,      // Épaisseur des lignes en pixels
-          opacity: 1,     // Opacité des lignes (0 à 1)
-          fillOpacity: 0.1 // Opacité de remplissage des polygones (0 à 1)
-        },
-        // onEachFeature: function (feature, layer) {
-        //   // Créez une popup avec le nom du département pour chaque entité
-        //   layer.bindPopup(feature.properties.nom);
-        // }
-      }).addTo(frontiersLayer);
-    });
+    // //TEST: ajout d'un layerGroup pour les frontières (geoJSON) : OK
+    // var frontiersLayer = L.geoJSON();
+    // fetch('assets/data/world.geojson')
+    // .then(response => response.json())
+    // .then(data => {
+    //   // Ajoutez chaque entité GeoJSON à la couche
+    //   L.geoJSON(data, {
+    //     style: {
+    //       color: "white", // Couleur des lignes à blanc
+    //       weight: 1,      // Épaisseur des lignes en pixels
+    //       opacity: 1,     // Opacité des lignes (0 à 1)
+    //       fillOpacity: 0.1 // Opacité de remplissage des polygones (0 à 1)
+    //     },
+    //     // onEachFeature: function (feature, layer) {
+    //     //   // Créez une popup avec le nom du département pour chaque entité
+    //     //   layer.bindPopup(feature.properties.nom);
+    //     // }
+    //   }).addTo(frontiersLayer);
+    // });
 
-    //TEST: faire apparaitre le layerGroup frontiersLayer avec l'input checkbox id="settings-frontiers" : OK
-    const settingsFrontiers = document.getElementById('settings-frontiers');
-    settingsFrontiers?.addEventListener('change', (event) => {
-      if (event.target instanceof HTMLInputElement) {
-        if (event.target.checked) {
-          frontiersLayer.addTo(this.map);
-        } else {
-          frontiersLayer.remove();
-        }
-      }
-    }
-    );
+    // //TEST: faire apparaitre le layerGroup frontiersLayer avec l'input checkbox id="settings-frontiers" : OK
+    // const settingsFrontiers = document.getElementById('settings-frontiers');
+    // settingsFrontiers?.addEventListener('change', (event) => {
+    //   if (event.target instanceof HTMLInputElement) {
+    //     if (event.target.checked) {
+    //       frontiersLayer.addTo(this.map);
+    //     } else {
+    //       frontiersLayer.remove();
+    //     }
+    //   }
+    // }
+    // );
 
     //TEST: ajout d'un layerGroup pour les lacs (geoJSON) : OK
     var lakesLayer = L.geoJSON();
@@ -264,11 +267,40 @@ export class MapComponent implements AfterViewInit {
     }
     );
 
-    //TEST: ajout d'une fonction de recherche leaflet-search : KO
-    // var searchLayer = L.layerGroup().addTo(this.map);
-    // //... adding data in searchLayer ...
-    // this.map.addControl( new L.Control.Search({layer: searchLayer}) );
-    // //searchLayer is a L.LayerGroup contains searched markers
+    //TEST : ajout d'un layerGroup pour les pays (geoJSON)
+    var countriesLayer = L.geoJSON();
+    fetch('assets/data/large.geojson')
+    .then(response => response.json())
+    .then(data => {
+      // Ajoutez chaque entité GeoJSON à la couche
+      L.geoJSON(data, {
+        style: {
+          color: "white", // Couleur des lignes à blanc
+          weight: 1,      // Épaisseur des lignes en pixels
+          opacity: 1,     // Opacité des lignes (0 à 1)
+          fillOpacity: 0.1 // Opacité de remplissage des polygones (0 à 1)
+        },
+        onEachFeature: function (feature, layer) {
+          // Créez une popup avec le nom du pays pour chaque entité
+          layer.bindPopup(feature.properties.name_fr);
+        }
+      }).addTo(countriesLayer);
+    });
+
+    //TEST: faire apparaitre le layerGroup countriesLayer avec l'input checkbox id="settings-countries" : OK
+    const settingsCountries = document.getElementById('settings-countries');
+    settingsCountries?.addEventListener('change', (event) => {
+      
+      if (event.target instanceof HTMLInputElement) {
+        if (event.target.checked) {
+          countriesLayer.addTo(this.map);
+        } else {
+          countriesLayer.remove();
+        }
+      }
+    }
+    );
+
 
     
 
@@ -338,13 +370,14 @@ export class MapComponent implements AfterViewInit {
 
 
   //TEST: Fonction de recherche dans les fichier geoJSON via le champs de saisie de l'input id="search-input" : OK
-  //TODO Pour le moment, affiche tous les résultats possibles contenant le terme de la recherche (searchValue) -> afficher seulement le résultat quand le terme correspond completement a la recherche (ex: "Paris")
+  // // TODO Pour le moment, affiche tous les résultats possibles contenant le terme de la recherche (searchValue) -> afficher seulement le résultat quand le terme correspond completement a la recherche (ex: "Paris") : OK
   //TODO Lorsque j'enchaine les recherches, le résultat de la recherche précédente reste affiché -> supprimer le résultat de la recherche précédente sans réinitialiser la carte
   search(): void {
+    
     // Récupérer la valeur de l'input
     const searchInput = document.getElementById('search-input') as HTMLInputElement;
     const searchValue = searchInput.value;
-    // console.log('recherche :' + searchValue) //OK
+    console.log('recherche :' + searchValue) //OK
 
     // Si la valeur de l'input est vide, ne rien faire
     if (searchValue === '') {
@@ -352,7 +385,8 @@ export class MapComponent implements AfterViewInit {
     }
 
     // Si la valeur de l'input n'est pas vide, rechercher dans le fichier geoJSON
-    fetch('./assets/data/capitals.geojson')
+    //TODO Recherche dans plusieurs fichiers
+    fetch('./assets/data/capitals.geojson') 
       .then(res => res.json())
       .then(data => {
         // Créer un tableau vide pour stocker les résultats de la recherche
@@ -362,7 +396,7 @@ export class MapComponent implements AfterViewInit {
         // Boucler sur les données du fichier geoJSON
         data.features.forEach((element: { properties?: { city?: string }; geometry: { coordinates: number[] } }) => {
           // Check if element.properties and element.properties.city exist
-          if (element.properties?.city?.toLowerCase().includes(searchValue.toLowerCase())) {
+          if (element.properties?.city?.toLowerCase() === searchValue.toLowerCase()) {
             searchResults.push(element);
             // console.table(searchResults); //OK
           }
@@ -375,10 +409,14 @@ export class MapComponent implements AfterViewInit {
           iconAnchor: [ 15, 30 ]
         });
 
-        // Si le tableau des résultats est vide, afficher un message d'erreur
+        // Si le tableau des résultats est vide, afficher un message d'erreur dans l'element 'message'
         if (searchResults.length === 0) {
-          alert('Aucun résultat trouvé');
+          // alert('Aucun résultat trouvé');
+          const message = "This is not the droids you're looking for";
+          this.message = message;
           return;
+        } else {
+          this.message = '';
         }
         // Si le tableau des résultats n'est pas vide, afficher les résultats sur la carte:
         // Créer un layerGroup pour stocker les résultats de la recherche
@@ -393,8 +431,8 @@ export class MapComponent implements AfterViewInit {
           // Ajouter le marqueur au layerGroup
           marker.addTo(searchResultsLayer);
           // console.table (searchResultsLayer); //OK
-
         });
+
 
         
         // Ajouter le layerGroup à la carte
@@ -405,7 +443,10 @@ export class MapComponent implements AfterViewInit {
       });
   }
 
-  
+    // Function to close the message pop-up
+    closeMessage() {
+      this.message = ''; // Clear the message to hide the pop-up
+    }
 
 
 
