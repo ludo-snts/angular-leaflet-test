@@ -12,7 +12,7 @@
                     <img src="./assets/icons/magnifying-glass-solid.svg">
                 </button>
                 <div class="search-input-wrapper" [ngClass]="{'show': showSearch}">
-                    <input type="text" id="search-input" class="search-input" (keydown)="searchEnter($event)">
+                    <input type="text" id="search-input" #searchInput2 class="search-input" (keydown)="searchEnter($event)">
                     <!--bouton valider-->
                     <!--<button class="search-validate-btn" (click)="search()">
                         GO
@@ -30,10 +30,6 @@
                         <label for="settings-markers">
                             <img class="settings-markers-img" src="./assets/icons/map-pin-solid.svg">
                         </label>
-                        <!--<input type="checkbox" id="settings-frontiers" class="settings-markers-input" name="settings-markers" value="markers">
-                        <label for="settings-frontiers">
-                            <img class="settings-markers-img" src="./assets/icons/globe-solid.svg">
-                        </label>-->
                         <input type="checkbox" id="settings-lakes" class="settings-markers-input" name="settings-markers" value="markers">
                         <label for="settings-lakes">
                             <img class="settings-markers-img" src="./assets/icons/water-solid.svg">
@@ -69,5 +65,4 @@
             </button>
         </div>
     </div>
-
 </div>

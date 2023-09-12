@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, NgZone } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
 
 
@@ -23,7 +23,6 @@ export class MapComponent implements AfterViewInit {
   //inialisation du message d'info/erreur
   public message: string = '';
 
-
   // Initialisation des tuiles
   private defaultTiles!: L.TileLayer; // tuiles par défaut (tuiles openStreetMap en ligne)
   private satelliteTiles!: L.TileLayer; // tuiles satellite (tuiles openStreetMap en ligne)
@@ -34,42 +33,48 @@ export class MapComponent implements AfterViewInit {
   // Initialisation de la variable de zoom
   public currentZoomLevel: number = 7; // Initialisez-la avec la valeur de zoom par défaut
 
+  // Initialisation des limites de la carte (South-West et North-East)
+  private bounds: L.LatLngBounds = L.latLngBounds([-90,-180], [90,180]);
+
   // initialisation de la carte (valeur par défaut)
   private initMap(): void {
     this.map = L.map('map', {
       center: [42.69607784382969, 2.8892290890216943], // coordonnées GPS lattitude, longitude de Mind And Go
       zoom: 7, // zoom de la carte
-      zoomControl: false, // désactivation du zoom par défaut
+      zoomControl: false, // désactivation des controles du zoom par défaut
+      maxBounds: this.bounds, // limites de la carte
+      worldCopyJump: true, 
+
     });
 
     // initialisation des tuiles par défaut (tuiles openStreetMap en ligne)
     this.defaultTiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
-      minZoom: 1,
+      minZoom: 2,
     });
 
     // initialisation des tuiles par défaut (tuiles openStreetMap en ligne)
     this.satelliteTiles = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
       maxZoom: 18,
-      minZoom: 1,
+      minZoom: 2,
     });
 
     // initialisation des tuiles (version de base) tuiles stockées en local dans le dossier assets/tiles/openStreetMap01
     this.OSM01Tiles = L.tileLayer('assets/tiles/openStreetMap01/{z}/{x}/{y}.png', {
       maxZoom: 7,
-      minZoom: 1,
+      minZoom: 2,
     });
 
     // initialisation des tuiles (version humanitaire) tuiles stockées en local dans le dossier assets/tiles/openStreetMap02
     this.OSM02Tiles = L.tileLayer('assets/tiles/openStreetMap02/{z}/{x}/{y}.png', {
       maxZoom: 7,
-      minZoom: 1,
+      minZoom: 2,
     });
 
     // initialisation des tuiles (version satellite) tuiles stockées en local dans le dossier assets/tiles/USGSNationalMapSatellite
     this.USGSSatelliteTiles = L.tileLayer('assets/tiles/USGSNationalMapSatellite/{z}/{x}/{y}.jpg', {
       maxZoom: 7,
-      minZoom: 1,
+      minZoom: 2,
     });
 
 
@@ -281,8 +286,12 @@ export class MapComponent implements AfterViewInit {
           fillOpacity: 0.1 // Opacité de remplissage des polygones (0 à 1)
         },
         onEachFeature: function (feature, layer) {
-          // Créez une popup avec le nom du pays pour chaque entité
-          layer.bindPopup(feature.properties.name_fr);
+          // Créez une popup avec le nom du pays et son drapeau
+          var popupContent = `
+            <img class="leaflet-popup-flag" src="assets/data/flags/4x3/${feature.properties.iso_a2_eh}.SVG" alt="${feature.properties.name_fr} Flag">
+            <h2 class="leaflet-popup-title">${feature.properties.name_fr}</h2>
+          `;
+          layer.bindPopup(popupContent);
         }
       }).addTo(countriesLayer);
     });
@@ -300,9 +309,6 @@ export class MapComponent implements AfterViewInit {
       }
     }
     );
-
-
-    
 
 
   } // fin de la fonction initMap()
@@ -354,13 +360,21 @@ export class MapComponent implements AfterViewInit {
     this.showSettings = !this.showSettings;
   }
 
+  // cibler l'input de recherche #searchInput du DOM
+  @ViewChild('searchInput2', { static: false }) searchInput2: ElementRef<HTMLInputElement> | undefined;
+
   // fonction accompagnant l'apparition/disparition de l'input de recherche: OK
   toggleSearch(): void {
     // Inverser la valeur actuelle de showSearch
     this.showSearch = !this.showSearch;
+
+    // Mettre le focus sur l'input si showSearch est true
+    if (this.showSearch) {
+      this.searchInput2?.nativeElement.focus();
+    }
   }
 
-  //fonction accompagnant l'appui sur Entrée dans la barre de recherche : OK
+  //fonction accompagnant l'appui sur Entrée dans la barre de recherche pour valider la recherche : OK
   searchEnter(event: KeyboardEvent): void {
     const { key } = event;
     if (key === 'Enter') {
@@ -368,12 +382,23 @@ export class MapComponent implements AfterViewInit {
     }
   }
 
+  // fonction accompagnant la fermeture du pop-up
+  closeMessage() {
+    this.message = ''; // Clear the message to hide the pop-up
+  }
+
 
   //TEST: Fonction de recherche dans les fichier geoJSON via le champs de saisie de l'input id="search-input" : OK
   // // TODO Pour le moment, affiche tous les résultats possibles contenant le terme de la recherche (searchValue) -> afficher seulement le résultat quand le terme correspond completement a la recherche (ex: "Paris") : OK
-  //TODO Lorsque j'enchaine les recherches, le résultat de la recherche précédente reste affiché -> supprimer le résultat de la recherche précédente sans réinitialiser la carte
+  
+  // // TODO Lorsque j'enchaine les recherches, le résultat de la recherche précédente reste affiché -> supprimer le résultat de la recherche précédente sans réinitialiser la carte : OK
   search(): void {
-    
+    // Nettoyer les marqueurs de la carte
+    this.map.eachLayer((layer) => {
+      if (layer instanceof L.Marker) {
+        layer.remove();
+      }
+    })
     // Récupérer la valeur de l'input
     const searchInput = document.getElementById('search-input') as HTMLInputElement;
     const searchValue = searchInput.value;
@@ -433,8 +458,6 @@ export class MapComponent implements AfterViewInit {
           // console.table (searchResultsLayer); //OK
         });
 
-
-        
         // Ajouter le layerGroup à la carte
         searchResultsLayer.addTo(this.map);
 
@@ -443,24 +466,14 @@ export class MapComponent implements AfterViewInit {
       });
   }
 
-    // Function to close the message pop-up
-    closeMessage() {
-      this.message = ''; // Clear the message to hide the pop-up
-    }
-
-
-
-
-  
-
   constructor() {
-
+    this.searchInput2 = undefined;
   }
 
   ngAfterViewInit(): void {
     this.initMap();
+    // Initialisation de searchInput2 ici
+    this.searchInput2 = new ElementRef<HTMLInputElement>(document.getElementById('search-input') as HTMLInputElement);
   }
-
-  
 
 }
