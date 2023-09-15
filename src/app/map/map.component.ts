@@ -24,8 +24,8 @@ export class MapComponent implements AfterViewInit {
   public message: string = '';
 
   // Initialisation des tuiles
-  private defaultTiles!: L.TileLayer; // tuiles par défaut (tuiles openStreetMap en ligne)
-  private satelliteTiles!: L.TileLayer; // tuiles satellite (tuiles openStreetMap en ligne)
+  // private defaultTiles!: L.TileLayer; // tuiles par défaut (tuiles openStreetMap en ligne)
+  // private satelliteTiles!: L.TileLayer; // tuiles satellite (tuiles openStreetMap en ligne)
   private OSM01Tiles!: L.TileLayer; // tuiles (version de base) tuiles stockées en local dans le dossier assets/tiles/openStreetMap01
   private OSM02Tiles!: L.TileLayer; // tuiles (version humanitaire) tuiles stockées en local dans le dossier assets/tiles/openStreetMap02
   private USGSSatelliteTiles!: L.TileLayer; // tuiles (version satellite) tuiles stockées en local dans le dossier assets/tiles/USGSNationalMapSatellite
@@ -48,16 +48,16 @@ export class MapComponent implements AfterViewInit {
     });
 
     // initialisation des tuiles par défaut (tuiles openStreetMap en ligne)
-    this.defaultTiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      minZoom: 2,
-    });
+    // this.defaultTiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //   maxZoom: 18,
+    //   minZoom: 2,
+    // });
 
     // initialisation des tuiles par défaut (tuiles openStreetMap en ligne)
-    this.satelliteTiles = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-      maxZoom: 18,
-      minZoom: 2,
-    });
+    // this.satelliteTiles = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    //   maxZoom: 18,
+    //   minZoom: 2,
+    // });
 
     // initialisation des tuiles (version de base) tuiles stockées en local dans le dossier assets/tiles/openStreetMap01
     this.OSM01Tiles = L.tileLayer('assets/tiles/openStreetMap01/{z}/{x}/{y}.png', {
@@ -81,13 +81,15 @@ export class MapComponent implements AfterViewInit {
 
     // ajout des tuiles à la carte
     // customTiles.addTo(this.map);
-    this.defaultTiles.addTo(this.map);
+    // this.defaultTiles.addTo(this.map);
+    this.OSM01Tiles.addTo(this.map);
+
 
 
     // ajout du controle des couches (tuiles)
     const baseMaps= {
-      " ":this.defaultTiles,
-      "  ":this.satelliteTiles,
+      //" ":this.defaultTiles,
+      //"  ":this.satelliteTiles,
       "   ":this.OSM01Tiles,
       "    ":this.OSM02Tiles,
       "     ":this.USGSSatelliteTiles
@@ -178,20 +180,31 @@ export class MapComponent implements AfterViewInit {
     //   }
     // });
 
+    interface GeoJSONFeature {
+      type: string;
+      properties: {
+        city: string;
+      };
+      geometry: {
+        type: string;
+        coordinates: [number, number];
+      };
+    }
     //TEST: La même chose avec un fichier geoJSON
     //structure d'un element du geoJSON: {"properties": {"country": "Bangladesh","city": "Dhaka","tld": "bd","iso3": "BGD","iso2": "BD"},"geometry": {"coordinates": [90.24, 23.43], "type": "Point"},"id": "BD"}
     // les ajouter au layerGroup geoJSONLayer : OK
     var geoJSONLayer = L.layerGroup();
     fetch('./assets/data/capitals.geojson')
       .then(res => res.json())
-      .then(data => {
-        data.features.forEach((element: { properties: { city: string; }; geometry: { coordinates: number[]; }; }) => {
-          const marker = L.marker([element.geometry.coordinates[1], element.geometry.coordinates[0]], { icon });
-          marker.bindPopup(element.properties.city);
-          marker.addTo(geoJSONLayer);
+      .then((data: { features: GeoJSONFeature[] }) => { // Utilisez le type GeoJSONFeature[]
+        data.features.forEach((element) => {
+          if (element.properties.city) {
+            const marker = L.marker([element.geometry.coordinates[1], element.geometry.coordinates[0]], { icon });
+            marker.bindPopup(element.properties.city);
+            marker.addTo(geoJSONLayer);
+          }
+        });
       });
-    }
-    );
 
     //TEST: faire apparaitre le layerGroup geoJSONLayer avec l'input checkbox id="settings-markers" : OK
     const settingsMarkers = document.getElementById('settings-markers');
@@ -241,7 +254,7 @@ export class MapComponent implements AfterViewInit {
 
     //TEST: ajout d'un layerGroup pour les lacs (geoJSON) : OK
     var lakesLayer = L.geoJSON();
-    fetch('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_10m_lakes.geojson')
+    fetch('./assets/data/lakes.geojson')
     .then(response => response.json())
     .then(data => {
       // Ajoutez chaque entité GeoJSON à la couche

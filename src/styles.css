@@ -11,7 +11,7 @@
     --img-width: 30px;
     --search-width: 15rem; /* définir la taille de la zone de recherche */
     --setting-width: calc(3 * 46px); /* définir la taille de la zone de réglages en fonction du nombre de marqueurs */
-    --layer-width: calc(50px + (5 * 46px));/*(largeur des n boutons (30px+8px de margin-inline (donc x2) par bouton) */
+    --layer-width: calc(50px + (3 * 46px));/*(largeur des n boutons (30px+8px de margin-inline (donc x2) par bouton) */
     /* couleurs */
     --color-light : #F5F5F5;
     --color-dark : #222;
@@ -492,24 +492,24 @@ height: 60%;
 }
 
 .leaflet-control-layers-base label:first-child{
-    background-image: url(./assets/icons/globe-solid.svg);
+    background-image: url(./assets/icons/earth-europe-solid.svg);
 }
 
 .leaflet-control-layers-base label:nth-child(2){
-    background-image: url(./assets/icons/satellite-solid.svg);
+    background-image: url(./assets/icons/earth-africa-solid.svg);
 }
 
 .leaflet-control-layers-base label:nth-child(3){
-    background-image: url(./assets/icons/floppy-disk-solid-bk.svg);
+    background-image: url(./assets/icons/satellite-solid.svg);
 }
 
-.leaflet-control-layers-base label:nth-child(4){
+/* .leaflet-control-layers-base label:nth-child(4){
     background-image: url(./assets/icons/floppy-disk-solid-bk.svg);
-}
+} */
 
-.leaflet-control-layers-base label:nth-child(5){
+/* .leaflet-control-layers-base label:nth-child(5){
     background-image: url(./assets/icons/floppy-disk-solid-bk.svg);
-}
+} */
 
 
 /* MESSAGE */
@@ -592,15 +592,18 @@ height: 60%;
     border: none !important;
     padding: 0 !important;
     background-color: var(--color-light) !important;
-    height: 10rem;
-    width: 10rem;
+    height: fit-content;
+    width: 15rem;
     overflow : hidden;
     display: flex;
 }
 .leaflet-popup-content {
     margin: 0 !important;
-    width : 1005%;
-    height : 100%;
+    width : 100%;
+    height : fit-content;
+    font-size: 20px;
+    /* padding: 1rem; */
+    text-align: center;
 }
 .leaflet-popup-flag {
     width: 100%;
@@ -611,6 +614,18 @@ height: 60%;
 .leaflet-popup-title {
     text-align: center;
     padding-block: .5rem;
+}
+
+.leaflet-popup-close-button {
+    background-color: #fff !important;
+    top: -12px !important;
+    right: -12px !important;
+    border-radius: 12px;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: .1rem;
+    box-shadow: 0 2px 10px #5e5e5e85;
 }
 
 /* MISC */
