@@ -547,13 +547,15 @@ height: 60%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .message-text {
     margin: .5rem;
     display : flex;
-    align-items: baseline;
-    justify-content: center;
+    /* align-items: baseline; */
 }
 
 .message-text img:nth-child(1) {

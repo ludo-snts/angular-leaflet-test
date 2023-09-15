@@ -450,7 +450,9 @@ export class MapComponent implements AfterViewInit {
         // Si le tableau des résultats est vide, afficher un message d'erreur dans l'element 'message'
         if (searchResults.length === 0) {
           // alert('Aucun résultat trouvé');
-          const message = "This is not the droids you're looking for";
+          // const message = "This is not the droids you're looking for";
+          const message = "Cette ville n'est pas enregistrée";
+
           this.message = message;
           return;
         } else {
